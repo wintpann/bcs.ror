@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   resources :users, only: [:edit, :update]
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
-  delete 'logout' => 'sessions#delete'
+  delete 'logout' => 'sessions#destroy'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

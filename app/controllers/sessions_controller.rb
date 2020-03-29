@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:session][:password])
       flash[:success]="Logged in"
       log_in @user
+      remember @user if params[:session][:remember_me]=='1'
       redirect_to root_path
     else
       flash[:alert]="Invalid password/login"
@@ -14,8 +15,8 @@ class SessionsController < ApplicationController
     end
   end
 
-  def delete
-    log_out
+  def destroy
+    log_out if logged_in?
     redirect_to root_path
   end
 end
