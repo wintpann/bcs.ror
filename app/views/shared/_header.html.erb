@@ -1,9 +1,12 @@
 <header>
   <ul>
     <li><%= link_to 'Home', root_path %></li>
-    <li><%= link_to 'Edit', '/users/1/edit' %></li>
-    <li><%= link_to 'Sign in', '#' %></li>
-    <li><%= link_to 'Sign up', signup_path %></li>
-    <li><%= link_to 'Sign out', '#' %></li>
+    <% if current_user %>
+      <li><%= link_to 'Edit', edit_user_path(current_user) %></li>
+      <li><%= link_to 'Sign out', logout_path, method: :delete %></li>
+    <% else %>
+      <li><%= link_to 'Sign in', login_path %></li>
+      <li><%= link_to 'Sign up', signup_path %></li>
+    <% end %>
   </ul>
 </header>
