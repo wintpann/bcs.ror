@@ -2,4 +2,5 @@
 <%= render 'shared/errors' %>
 <%= form_for :user, url: signup_path do |f| %>
   <%= render 'user', f: f %>
+  <%= f.submit 'Sign up' %>
 <% end %>

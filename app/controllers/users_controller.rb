@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :update]
-  before_action :correct_user!, only: [:edit, :update]
+  before_action :authenticate_user!, only: [:edit, :update, :index, :destroy]
+  before_action :correct_user!, only: [:edit, :update, :show, :destroy]
+  before_action :admin_user!, only: :index
   def new
   end
 
@@ -30,6 +31,21 @@ class UsersController < ApplicationController
       @errors=@user.errors.full_messages
       render 'edit'
     end
+  end
+
+  def show
+    @user=User.find(params[:id])
+  end
+
+  def index
+    @users=User.all
+  end
+
+  def destroy
+    User.destroy(params[:id])
+    flash[:success]='Profile deleted'
+    log_out if !current_user.admin?
+    redirect_to root_path
   end
 
 

@@ -2,4 +2,5 @@
 <%= render 'shared/errors' %>
 <%= form_for @user do |f| %>
   <%= render 'user', f: f %>
+  <%= f.submit 'Edit' %>
 <% end %>
