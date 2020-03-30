@@ -20,3 +20,17 @@ taras.products.create!( name: 'apple',
 taras.products.create!( name: 'strawberry',
                         price_in: 90,
                         price_out: 160 )
+
+taras.products.create!( name: 'bread',
+                        price_in: 20,
+                        price_out: 50 )
+
+taras.products.create!( name: 'peanut',
+                        price_in: 60,
+                        price_out: 86,
+                        active: false )
+
+taras.products.create!( name: 'sunflower',
+                        price_in: 160,
+                        price_out: 210,
+                        active: false )
