@@ -38,7 +38,18 @@ class ProductsController < ApplicationController
   end
 
   def index
-    @products=User.find(params[:user_id]).products
+    @active_products=User.find(params[:user_id]).active_products
+  end
+
+  def inactive
+    @inactive_products=User.find(params[:id]).inactive_products
+  end
+
+  def destroy
+    product=Product.find(params[:id])
+    product.toggle_active
+    flash[:success] = (product.active? ? 'Product restored' : 'Product deleted')
+    redirect_to user_products_path
   end
 
   private

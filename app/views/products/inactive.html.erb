@@ -1,0 +1,10 @@
+<% if @inactive_products %>
+  <div>
+    <h2>Inactive products</h2>
+    <ul>
+      <% @inactive_products.each do |product| %>
+        <li><%= link_to product.name, user_product_path(params[:id], product.id) %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

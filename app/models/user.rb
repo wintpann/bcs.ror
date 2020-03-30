@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   attr_accessor :remember_token
-  
+
   has_many :products
 
   before_save{self.email.downcase!}
@@ -32,6 +32,14 @@ class User < ApplicationRecord
   def authenticated?(remember_token)
     return false if remember_digest.nil?
     BCrypt::Password.new(remember_digest) == remember_token
+  end
+
+  def active_products
+    Product.active.where(user_id: self.id)
+  end
+
+  def inactive_products
+    Product.inactive.where(user_id: self.id)
   end
 
 end

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :users, only: [:edit, :update, :show, :index, :destroy] do
     resources :products
   end
+  post 'users/:id/deleted_products' => 'products#inactive', as: :user_inactive_products
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
