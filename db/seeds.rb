@@ -34,3 +34,12 @@ taras.products.create!( name: 'sunflower',
                         price_in: 160,
                         price_out: 210,
                         active: false )
+
+taras.employees.create!(name: 'Misha',
+                        fixed_rate: 500,
+                        interest_rate: 10 )
+                        
+taras.employees.create!(name: 'Lera',
+                        fixed_rate: 600,
+                        interest_rate: 8,
+                        working: true)
