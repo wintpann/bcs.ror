@@ -58,7 +58,9 @@ module SessionsHelper
   def correct_user!
     return true if current_user.admin?
 
-    user=User.find(params[:id])
+    user_id = params[:user_id].nil? ? params[:id] : params[:user_id]
+    user=User.find(user_id)
+
     if !current_user?(user)
       flash[:danger]="You don't have access to this page"
       redirect_to root_path

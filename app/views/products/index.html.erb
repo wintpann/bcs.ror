@@ -1,0 +1,8 @@
+<h2>All products</h2>
+<% if @products %>
+  <ul>
+    <% @products.each do |product| %>
+      <li><%= link_to product.name, user_product_path(params[:user_id], product.id) %></li>
+    <% end %>
+  </ul>
+<% end %>
