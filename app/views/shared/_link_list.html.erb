@@ -9,5 +9,5 @@
     </ul>
   </div>
 <% else %>
-  <%= content_tag :p, "There is no any #{plural(collection.class.to_s[0..-24])}" %>
+  <%= content_tag :p, "There is no any #{plural(collection.new.class.to_s)}" %>
 <% end %>
