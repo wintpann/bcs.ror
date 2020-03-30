@@ -39,7 +39,7 @@ class EmployeesController < ApplicationController
     @employees=User.find(params[:user_id]).employees
   end
 
-  def delete
+  def destroy
   end
 
   private
