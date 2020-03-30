@@ -1,3 +1,9 @@
 class Employee < ApplicationRecord
+  before_save{self.name.downcase!}
+
   belongs_to :user
+
+  validates :name, presence: true, uniqueness: {case_sensitive: false}
+  validates :fixed_rate, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :interest_rate, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: 100 }
 end

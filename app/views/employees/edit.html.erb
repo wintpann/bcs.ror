@@ -1,2 +1,6 @@
-<h1>Employees#edit</h1>
-<p>Find me in app/views/employees/edit.html.erb</p>
+<h3>Edit employee</h3>
+<%= render 'shared/errors' %>
+<%= form_for @employee, url: user_employee_path, method: :put do |f| %>
+  <%= render 'employee', f: f %>
+  <%= f.submit 'Edit employee' %>
+<% end %>
