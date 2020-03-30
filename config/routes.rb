@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post 'signup'=>'users#create'
   resources :users, only: [:edit, :update, :show, :index, :destroy] do
     resources :products
+    resources :employees
   end
   post 'users/:id/deleted_products' => 'products#inactive', as: :user_inactive_products
   get 'login' => 'sessions#new'
