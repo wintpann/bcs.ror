@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   root 'pages#home'
   get 'signup'=>'users#new'
   post 'signup'=>'users#create'
-  resources :users, only: [:edit, :update, :show, :index, :destroy]
+  resources :users, only: [:edit, :update, :show, :index, :destroy] do
+    resources :products
+  end
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
