@@ -2,6 +2,7 @@ class User < ApplicationRecord
   attr_accessor :remember_token
 
   has_many :products
+  has_many :employees
 
   before_save{self.email.downcase!}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
