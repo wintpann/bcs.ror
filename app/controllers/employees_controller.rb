@@ -2,9 +2,18 @@ class EmployeesController < ApplicationController
   before_action :authenticate_user!
   before_action :correct_user!
   def new
+    @employee=User.find(params[:user_id]).employees.new
   end
 
   def create
+    @employee=User.find(params[:user_id]).employees.new(employee_params)
+    if @employee.save
+      flash[:success]='Employee added'
+      redirect_to user_employee_path(params[:user_id], @employee.id)
+    else
+      @errors=@employee.errors.full_messages
+      render 'new'
+    end
   end
 
   def edit

@@ -1,2 +1,6 @@
-<h1>Employees#new</h1>
-<p>Find me in app/views/employees/new.html.erb</p>
+<h3>New employee</h3>
+<%= render 'shared/errors' %>
+<%= form_for @employee, url: user_employees_path do |f| %>
+  <%= render 'employee', f: f %>
+  <%= f.submit 'Add employee' %>
+<% end %>
