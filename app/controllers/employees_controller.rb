@@ -1,4 +1,6 @@
 class EmployeesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :correct_user!
   def new
   end
 
@@ -12,6 +14,7 @@ class EmployeesController < ApplicationController
   end
 
   def show
+    @employee=User.find(params[:user_id]).employees.find(params[:id])
   end
 
   def index

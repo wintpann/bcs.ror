@@ -1,2 +1,10 @@
-<h1>Employees#show</h1>
-<p>Find me in app/views/employees/show.html.erb</p>
+<%= content_tag :h3, "#{@employee.name}: #{working?(@employee)}" %>
+
+<div>
+  <div>
+    <%= content_tag :p, "Fixed rate: #{@employee.fixed_rate}" %>
+  </div>
+  <div>
+    <%= content_tag :p, "Interest rate: #{@employee.interest_rate}" %>
+  </div>
+</div>
