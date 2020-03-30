@@ -15,6 +15,7 @@ class EmployeesController < ApplicationController
   end
 
   def index
+    @employees=User.find(params[:user_id]).employees
   end
 
   def delete

@@ -1,2 +1,12 @@
-<h1>Employees#index</h1>
-<p>Find me in app/views/employees/index.html.erb</p>
+<h2>Employees</h2>
+<% if @employees %>
+  <div>
+    <ul>
+      <% @employees.each do |employee| %>
+        <li>
+          <%= link_to employee.name, user_employee_path(params[:user_id], employee.id) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
