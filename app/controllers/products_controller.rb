@@ -47,7 +47,7 @@ class ProductsController < ApplicationController
 
   def destroy
     product=Product.find(params[:id])
-    product.toggle_active
+    toggle_active(product)
     flash[:success] = (product.active? ? 'Product restored' : 'Product deleted')
     redirect_to user_products_path
   end

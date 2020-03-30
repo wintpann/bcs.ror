@@ -1,0 +1,10 @@
+<% if @inactive_employees %>
+  <div>
+    <h2>Inactive employees</h2>
+    <ul>
+      <% @inactive_employees.each do |employee| %>
+        <li><%= link_to employee.name, user_employee_path(params[:id], employee.id) %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

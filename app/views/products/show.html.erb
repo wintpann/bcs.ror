@@ -14,5 +14,5 @@
 <% end %>
 
 <div>
-  <%= link_to sign(@product), user_product_path, method: :delete, data: {confirm: message(@product)} %>
+  <%= link_to toggler_action(@product), user_product_path, method: :delete, data: {confirm: confirm_message(@product)} %>
 </div>

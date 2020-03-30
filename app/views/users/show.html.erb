@@ -9,7 +9,8 @@
     </ul>
   </div>
   <div class="danger-zone">
-    <div><%= link_to 'Deleted products', user_inactive_products_path(@user), method: :post %></div>
+    <div><%= link_to 'Deleted products', user_inactive_products_path(@user) %></div>
+    <div><%= link_to 'Deleted employees', user_inactive_employees_path(@user) %></div>
     <div><%= link_to 'Edit profile', edit_user_path(@user) %></div>
     <div><%= link_to 'Delete profile', user_path(@user), method: :delete, data: {confirm: 'Are you exactly sure? Action cannot be undone'} %></div>
   </div>

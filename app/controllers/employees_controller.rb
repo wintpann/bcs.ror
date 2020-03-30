@@ -36,10 +36,23 @@ class EmployeesController < ApplicationController
   end
 
   def index
-    @employees=User.find(params[:user_id]).employees
+    @active_employees=User.find(params[:user_id]).active_employees
   end
 
   def destroy
+    @employee=Employee.find(params[:id])
+    if @employee.working?
+      flash[:danger]='You cannot delete WORKING employee. Finish its job first'
+      redirect_to user_employee_path
+    else
+      toggle_active(@employee)
+      flash[:success] = (@employee.active? ? 'Employee restored' : 'Employee deleted')
+      redirect_to user_employees_path
+    end
+  end
+
+  def inactive
+    @inactive_employees=User.find(params[:id]).inactive_employees
   end
 
   private

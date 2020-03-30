@@ -7,7 +7,19 @@
   <div>
     <%= content_tag :p, "Interest rate: #{@employee.interest_rate}" %>
   </div>
+
+
+  <% if @employee.active? %>
+  <div>
+    <%= link_to 'All employees', user_employees_path %>
+  </div>
   <div>
     <%= link_to 'Edit employee', edit_user_employee_path %>
+  </div>
+  <% end %>
+
+
+  <div>
+    <%= link_to toggler_action(@employee), user_employee_path, method: :delete, data: {confirm: confirm_message(@employee)} %>
   </div>
 </div>

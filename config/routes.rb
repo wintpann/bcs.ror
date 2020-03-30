@@ -6,7 +6,8 @@ Rails.application.routes.draw do
     resources :products
     resources :employees
   end
-  post 'users/:id/deleted_products' => 'products#inactive', as: :user_inactive_products
+  get 'users/:id/deleted_products' => 'products#inactive', as: :user_inactive_products
+  get 'users/:id/deleted_employees' => 'employees#inactive', as: :user_inactive_employees
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'

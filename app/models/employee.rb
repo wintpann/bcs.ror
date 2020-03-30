@@ -12,4 +12,12 @@ class Employee < ApplicationRecord
   validates :fixed_rate, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :interest_rate, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: 100 }
 
+  def self.active
+    self.all.where(active: true)
+  end
+
+  def self.inactive
+    self.all.where(active: false)
+  end
+
 end

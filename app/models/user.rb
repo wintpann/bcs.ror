@@ -56,4 +56,12 @@ class User < ApplicationRecord
     self.all.where(admin: false)
   end
 
+  def active_employees
+    Employee.active.where(user_id: self.id)
+  end
+
+  def inactive_employees
+    Employee.inactive.where(user_id: self.id)
+  end
+
 end

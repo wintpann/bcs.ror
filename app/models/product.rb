@@ -20,9 +20,4 @@ class Product < ApplicationRecord
     self.all.where(active: false)
   end
 
-  def toggle_active
-    new_value = self.active? ? false : true
-    update_attribute(:active, new_value)
-  end
-
 end
