@@ -2,6 +2,9 @@
 <div>
   <div>Email: <%= @user.email %></div>
   <div>Created at: <%= @user.created_at.localtime.to_s[0..-7] %></div>
-  <div><%= link_to 'Edit profile', edit_user_path(@user) %></div>
-  <div><%= link_to 'Delete profile', user_path(@user), method: :delete, data: {confirm: 'Are you exactly sure? Action cannot be undone'} %></div>
+
+  <div class="danger-zone">
+    <div><%= link_to 'Edit profile', edit_user_path(@user) %></div>
+    <div><%= link_to 'Delete profile', user_path(@user), method: :delete, data: {confirm: 'Are you exactly sure? Action cannot be undone'} %></div>
+  </div>
 </div>
