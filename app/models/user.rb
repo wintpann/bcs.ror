@@ -4,7 +4,16 @@ class User < ApplicationRecord
   has_many :products
   has_many :employees
 
-  before_save{self.email.downcase!}
+  before_save :before_saving
+
+  def before_saving
+    self.email.strip!
+    self.email.downcase!
+
+    self.name.strip!
+    self.name.capitalize!
+  end
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :name, length: {minimum: 2, maximum: 50}
   validates :email, format: {with: VALID_EMAIL_REGEX}, uniqueness: {case_sensitive: false}

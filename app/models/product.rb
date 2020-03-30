@@ -1,5 +1,10 @@
 class Product < ApplicationRecord
-  before_save{self.name.downcase!}
+  before_save :before_saving
+
+  def before_saving
+    self.name.strip!
+    self.name.upcase!
+  end
 
   belongs_to :user
 
