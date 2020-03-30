@@ -1,13 +1,3 @@
 <h2>Employees</h2>
 <%= link_to 'Add employee', new_user_employee_path %>
-<% if @active_employees %>
-  <div>
-    <ul>
-      <% @active_employees.each do |employee| %>
-        <li>
-          <%= link_to employee.name, user_employee_path(params[:user_id], employee.id) %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<%= render 'shared/link_list', collection: @active_employees, common_url: user_employees_path %>

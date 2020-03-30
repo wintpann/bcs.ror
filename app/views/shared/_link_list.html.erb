@@ -1,0 +1,13 @@
+<% if collection && collection.any? %>
+  <div>
+    <ul>
+      <% collection.each do |collection_item| %>
+        <li>
+          <%= link_to collection_item.name, "#{common_url}/#{collection_item.id}"%>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% else %>
+  <%= content_tag :p, "There is no any #{plural(collection.class.to_s[0..-24])}" %>
+<% end %>
