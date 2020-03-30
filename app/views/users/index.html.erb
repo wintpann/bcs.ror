@@ -2,11 +2,9 @@
 <div>
     <ul>
       <% @users.each do |user| %>
-        <% if !user.admin? %>
           <li>
             <%= link_to "#{user.name}: #{user.email}", user_path(user) %>
           </li>
-        <% end %>
       <% end %>
     </ul>
 </div>

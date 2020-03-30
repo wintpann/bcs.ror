@@ -42,4 +42,8 @@ class User < ApplicationRecord
     Product.inactive.where(user_id: self.id)
   end
 
+  def self.all_without_admins
+    self.all.where(admin: false)
+  end
+
 end
