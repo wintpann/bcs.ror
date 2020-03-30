@@ -3,3 +3,9 @@
   <div><%= content_tag :p, "Purchase price: #{@product.price_in}" %></div>
   <div><%= content_tag :p, "Selling price: #{@product.price_out}" %></div>
 </div>
+<div>
+  <%= link_to 'Edit product', edit_user_product_path %>
+</div>
+<div>
+  <%= link_to 'All products', user_products_path %>
+</div>
