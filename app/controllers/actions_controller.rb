@@ -29,7 +29,6 @@ class ActionsController < ApplicationController
       if value.to_i > 0
         product=Product.find_by(name: key)
         @event.shopping_events.create_event(product: product, amount: value.to_i)
-        @user.warehouses.change_product(product: product, amount: value.to_i)
       end
     end
     redirect_to user_warehouse_path
