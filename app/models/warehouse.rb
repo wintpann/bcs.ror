@@ -7,19 +7,19 @@ class Warehouse < ApplicationRecord
   belongs_to :product
   belongs_to :user
 
-  def self.change_product(product_to_change, amount_to_change)
-    if (warehouse=self.have_product?(product_to_change))
-      if (warehouse.amount+amount_to_change) < 0
+  def self.change_product(options={})
+    if (warehouse=self.have_product?(options[:product]))
+      if (warehouse.amount+options[:amount]) < 0
         @@error="There cannot be a negative number of products"
         return
       end
-      warehouse.update_attribute(:amount, warehouse.amount+amount_to_change)
+      warehouse.update_attribute(:amount, warehouse.amount+options[:amount])
     else
-      if amount_to_change < 0
+      if options[:amount] < 0
         @@error="There cannot be a negative number of products"
         return
       end
-      self.create!(amount: amount_to_change, product: product_to_change)
+      self.create!(amount: options[:amount], product: options[:product])
     end
   end
 

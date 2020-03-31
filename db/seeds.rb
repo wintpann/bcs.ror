@@ -65,8 +65,11 @@ taras.employees.create!(name: 'Danil',
                         interest_rate: 26,
                         active: false )
 
-taras.warehouses.change_product( orange, 5 )
+taras.warehouses.change_product(product: orange,
+                                amount: 5 )
 
-taras.warehouses.change_product( orange, 5 )
+taras.warehouses.change_product(product: bread,
+                                amount: 18 )
 
-taras.warehouses.change_product( orange, 5 )
+taras.warehouses.change_product(product: sunflower,
+                                amount: 7 )
