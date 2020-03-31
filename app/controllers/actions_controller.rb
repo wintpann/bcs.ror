@@ -27,8 +27,9 @@ class ActionsController < ApplicationController
     @event=@user.all_events.create(event_type: 'shopping')
     shopping_params.each do |key, value|
       if value.to_i > 0
-        @event.shopping_events.create(product: Product.find_by(name: key), amount: value.to_i)
-        @user.warehouses.change_product(product: Product.find_by(name: key), amount: value.to_i)
+        product=Product.find_by(name: key)
+        @event.shopping_events.create_event(product: product, amount: value.to_i)
+        @user.warehouses.change_product(product: product, amount: value.to_i)
       end
     end
     redirect_to user_warehouse_path
