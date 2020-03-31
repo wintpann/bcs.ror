@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :products
   has_many :employees
   has_many :warehouses
+  has_many :all_events
 
   before_save :before_saving
 
