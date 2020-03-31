@@ -1,7 +1,5 @@
-<%= content_tag :h2, "#{@user.name} profile" %>
+<%= content_tag :h2, "Welcome, #{@user.name}" %>
 <div>
-  <div>Email: <%= @user.email %></div>
-  <div>Created at: <%= @user.created_at.localtime.to_s[0..-7] %></div>
   <div class="links">
     <ul>
       <li><%= link_to 'Products', user_products_path(@user) %></li>

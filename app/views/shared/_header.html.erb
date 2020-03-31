@@ -8,7 +8,7 @@
   <% elsif current_user %>
     <ul>
       <li><%= link_to 'Home', root_path %></li>
-      <li><%= link_to 'Profile', user_path(current_user) %></li>
+      <li><%= link_to 'Management', user_path(current_user) %></li>
       <li><%= link_to 'Sign out', logout_path, method: :delete %></li>
     </ul>
   <% else %>
