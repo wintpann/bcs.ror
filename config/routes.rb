@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   resources :users, only: [:edit, :update, :show, :index, :destroy] do
     resources :products
     resources :employees
+    get 'deleted_products' => 'products#inactive', as: :inactive_products
+    get 'deleted_employees' => 'employees#inactive', as: :inactive_employees
   end
-  get 'users/:id/deleted_products' => 'products#inactive', as: :user_inactive_products
-  get 'users/:id/deleted_employees' => 'employees#inactive', as: :user_inactive_employees
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'

@@ -42,7 +42,7 @@ class ProductsController < ApplicationController
   end
 
   def inactive
-    @inactive_products=User.find(params[:id]).inactive_products
+    @inactive_products=User.find(params[:user_id]).inactive_products
   end
 
   def destroy

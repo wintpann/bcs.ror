@@ -53,7 +53,7 @@ class EmployeesController < ApplicationController
   end
 
   def inactive
-    @inactive_employees=User.find(params[:id]).inactive_employees
+    @inactive_employees=User.find(params[:user_id]).inactive_employees
   end
 
   private
