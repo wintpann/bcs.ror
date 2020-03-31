@@ -64,4 +64,12 @@ class User < ApplicationRecord
     Employee.inactive.where(user_id: self.id)
   end
 
+  def active_working_employees
+    Employee.active_working.where(user_id: self.id)
+  end
+
+  def active_free_employees
+    Employee.active_free.where(user_id: self.id)
+  end
+
 end

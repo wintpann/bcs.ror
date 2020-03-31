@@ -36,7 +36,8 @@ class EmployeesController < ApplicationController
   end
 
   def index
-    @active_employees=User.find(params[:user_id]).active_employees
+    @active_working_employees=User.find(params[:user_id]).active_working_employees
+    @active_free_employees=User.find(params[:user_id]).active_free_employees
   end
 
   def destroy

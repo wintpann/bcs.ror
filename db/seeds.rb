@@ -41,16 +41,21 @@ taras.products.create!( name: 'sunflower',
 
 taras.employees.create!(name: 'Misha',
                         fixed_rate: 500,
-                        interest_rate: 10 )
+                        interest_rate: 10,
+                        working: true )
 
 taras.employees.create!(name: 'Dima',
                         fixed_rate: 800,
-                        interest_rate: 2 )
+                        interest_rate: 2,
+                        working: true )
 
 taras.employees.create!(name: 'Lera',
                         fixed_rate: 600,
-                        interest_rate: 8,
-                        working: true )
+                        interest_rate: 8 )
+
+taras.employees.create!(name: 'Sasha',
+                        fixed_rate: 500,
+                        interest_rate: 15 )
 
 taras.employees.create!(name: 'Maxim',
                         fixed_rate: 400,

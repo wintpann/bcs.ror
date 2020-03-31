@@ -20,4 +20,12 @@ class Employee < ApplicationRecord
     self.all.where(active: false)
   end
 
+  def self.active_working
+    self.active.where(working: true)
+  end
+
+  def self.active_free
+    self.active.where(working: false)
+  end
+
 end
