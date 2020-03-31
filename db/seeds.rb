@@ -65,11 +65,13 @@ taras.employees.create!(name: 'Danil',
                         interest_rate: 26,
                         active: false )
 
-taras.warehouses.change_product(product: orange,
-                                amount: 5 )
+first_event=taras.all_events.create(event_type: 'shopping')
 
-taras.warehouses.change_product(product: bread,
-                                amount: 18 )
+first_event.shopping_events.create(product: orange,
+                                        amount: 5 )
 
-taras.warehouses.change_product(product: sunflower,
-                                amount: 7 )
+first_event.shopping_events.create(product: bread,
+                                        amount: 18 )
+
+first_event.shopping_events.create(product: sunflower,
+                                        amount: 7 )
