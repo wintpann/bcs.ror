@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   has_many :products
   has_many :employees
+  has_many :warehouses
 
   before_save :before_saving
 
