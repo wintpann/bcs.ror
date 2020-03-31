@@ -7,7 +7,7 @@ class Product < ApplicationRecord
   end
 
   belongs_to :user
-  has_many :warehouses
+  has_one :warehouse
 
   validates :name, presence: true, uniqueness: {case_sensitive: false}
   validates :price_in, numericality: { only_integer: true, greater_than: 0 }
