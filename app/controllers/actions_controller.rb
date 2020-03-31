@@ -31,6 +31,7 @@ class ActionsController < ApplicationController
         @user.warehouses.change_product(product: Product.find_by(name: key), amount: value.to_i)
       end
     end
+    redirect_to user_warehouse_path
   end
 
 
