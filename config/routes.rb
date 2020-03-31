@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :employees
     get 'deleted_products' => 'products#inactive', as: :inactive_products
     get 'deleted_employees' => 'employees#inactive', as: :inactive_employees
+    get 'warehouse' => 'actions#warehouse', as: :warehouse
   end
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
