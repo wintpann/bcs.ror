@@ -28,6 +28,7 @@ class ActionsController < ApplicationController
     shopping_params.each do |key, value|
       if value.to_i > 0
         @event.shopping_events.create(product: Product.find_by(name: key), amount: value.to_i)
+        @user.warehouses.change_product(product: Product.find_by(name: key), amount: value.to_i)
       end
     end
   end

@@ -6,7 +6,7 @@
       <div>
         <%= f.label product.name %>
         <%= f.text_field product.name, value: 0%>
-        <%= content_tag :span, 'unit(s)' %>
+        <%= content_tag :span, "unit(s) * #{product.price_in} rub" %>
       </div>
     <% end %>
     <%= f.submit 'Shop' %>
