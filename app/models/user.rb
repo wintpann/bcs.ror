@@ -74,4 +74,13 @@ class User < ApplicationRecord
     Employee.active_free.where(user_id: self.id)
   end
 
+  def destroy_user
+    self.warehouses.destroy_all
+    self.all_events.each { |event| event.shopping_events.destroy_all }
+    self.all_events.destroy_all
+    self.employees.destroy_all
+    self.products.destroy_all
+    self.destroy
+  end
+
 end

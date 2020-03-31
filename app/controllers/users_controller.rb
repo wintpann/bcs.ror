@@ -43,9 +43,7 @@ class UsersController < ApplicationController
 
   def destroy
     user=User.find(params[:id])
-    user.products.destroy_all
-    user.employees.destroy_all
-    user.destroy
+    user.destroy_user
     flash[:success]='Profile deleted'
     log_out if !current_user.admin?
     redirect_to root_path
