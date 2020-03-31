@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get 'shopping' => 'actions#new_shopping', as: :new_shopping
     post 'shopping' => 'actions#create_shopping', as: :create_shopping
     get 'all_events' => 'actions#all_events', as: :all_events
+    get 'event/:id' => 'actions#event', as: :event
   end
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'

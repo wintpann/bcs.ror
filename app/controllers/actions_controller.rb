@@ -15,6 +15,10 @@ class ActionsController < ApplicationController
     @all_events=@user.all_events.all
   end
 
+  def event
+    @event=@user.all_events.find(params[:id])
+  end
+
   def new_shopping
   end
 
