@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     get 'deleted_products' => 'products#inactive', as: :inactive_products
     get 'deleted_employees' => 'employees#inactive', as: :inactive_employees
     get 'warehouse' => 'actions#warehouse', as: :warehouse
+    get 'shopping' => 'actions#new_shopping', as: :new_shopping
+    post 'shopping' => 'actions#create_shopping', as: :create_shopping
   end
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
