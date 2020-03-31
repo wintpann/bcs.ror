@@ -4,6 +4,10 @@ module ApplicationHelper
     pluralize(2, word.to_s)[2..-1]
   end
 
+  def to_local(time)
+    time.to_s[0...-7]
+  end
+
   def toggle_active(model)
     new_value = model.active? ? false : true
     model.update_attribute(:active, new_value)
