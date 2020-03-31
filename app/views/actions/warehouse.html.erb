@@ -1,2 +1,19 @@
-<h1>Actions#warehouse</h1>
-<p>Find me in app/views/actions/warehouse.html.erb</p>
+<h2>Warehouse</h2>
+<% if @warehouses && @warehouses.any? %>
+  <table border="1">
+    <tr>
+      <th>Product</th>
+      <th>Amount</th>
+    </tr>
+    <% @warehouses.each do |item| %>
+      <tr>
+        <td>
+          <%=item.product.name%>
+        </td>
+        <td>
+          <%=item.amount%>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
