@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     get 'warehouse' => 'actions#warehouse', as: :warehouse
     get 'shopping' => 'actions#new_shopping', as: :new_shopping
     post 'shopping' => 'actions#create_shopping', as: :create_shopping
-    get 'all_events' => 'actions#all_events', as: :all_events
+    get 'events' => 'actions#events', as: :events
     get 'event/:id' => 'actions#event', as: :event
   end
   get 'login' => 'sessions#new'

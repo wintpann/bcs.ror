@@ -11,8 +11,8 @@ class ActionsController < ApplicationController
     @warehouses=@user.warehouses
   end
 
-  def all_events
-    @all_events=@user.all_events.all
+  def events
+    @events=@user.all_events.all
   end
 
   def event
