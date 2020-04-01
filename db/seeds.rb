@@ -73,3 +73,11 @@ first_event.shopping_events.create_event(product: bread,
 
 first_event.shopping_events.create_event(product: sunflower,
                                         amount: 70 )
+
+second_event=taras.all_events.create(event_type: 'throwing')
+
+second_event.throwing_events.create_event(product: orange,
+                                        amount: 20 )
+
+second_event.throwing_events.create_event(product: bread,
+                                        amount: 10 )
