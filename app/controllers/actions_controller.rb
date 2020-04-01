@@ -38,6 +38,13 @@ class ActionsController < ApplicationController
     redirect_to user_warehouse_path
   end
 
+  def new_throwing
+  end
+
+  def create_throwing
+    
+  end
+
 
   def shopping_params
     params.require(:shopping_event).permit(product_permitted_params(@products))
