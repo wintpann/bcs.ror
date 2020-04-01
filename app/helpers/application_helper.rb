@@ -8,6 +8,10 @@ module ApplicationHelper
     time.to_s[0...-7]
   end
 
+  def to_local_time(time)
+    time.to_s[11...-7]
+  end
+
   def toggle_active(model)
     new_value = model.active? ? false : true
     model.update_attribute(:active, new_value)

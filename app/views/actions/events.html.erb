@@ -1,11 +1,18 @@
 <% if @events && @events.any? %>
-  <ul>
-    <% @events.each do |event| %>
+  <% @events.each do |key, value| %>
+  <div>
+    <%= content_tag :h4, key %>
+    <ul>
+      <% value.each do |event| %>
         <li>
-          <% if event.event_type=='shopping'%>
-            <%= link_to "Shopping: #{event.sum} rub | #{to_local(event.created_at)}", user_event_path(params[:user_id], event.id) %>
+
+          <% if event.event_type=='shopping' %>
+            <%= link_to "#{to_local_time(event.created_at)} | Shopping: #{event.sum} rub", user_event_path(params[:user_id], event.id) %>
           <% end %>
+
         </li>
-    <% end %>
-  </ul>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
 <% end %>
