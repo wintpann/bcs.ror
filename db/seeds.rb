@@ -39,13 +39,11 @@ sunflower=taras.products.create!( name: 'sunflower',
 
 taras.employees.create!(name: 'Misha',
                         fixed_rate: 500,
-                        interest_rate: 10,
-                        working: true )
+                        interest_rate: 10 )
 
 taras.employees.create!(name: 'Dima',
                         fixed_rate: 800,
-                        interest_rate: 2,
-                        working: true )
+                        interest_rate: 2 )
 
 taras.employees.create!(name: 'Lera',
                         fixed_rate: 600,
