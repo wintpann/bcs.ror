@@ -37,6 +37,15 @@ module ActionsHelper
     @events
   end
 
+  def create_new_shopping(options={})
+    options[:shopping_params].each do |key, value|
+      if value.to_i > 0
+        product=Product.find_by(name: key)
+        options[:event].shopping_events.create_event(product: product, amount: value.to_i)
+      end
+    end
+  end
+
   def product_permitted_params(products)
     permitted_params=[]
     products.each do |product|
