@@ -46,11 +46,7 @@ class ActionsController < ApplicationController
 
 
   def shopping_params
-    permitted_params=[]
-    @products.each do |product|
-      permitted_params.push product.name
-    end
-    params.require(:shopping_event).permit(permitted_params)
+    params.require(:shopping_event).permit(product_permitted_params(@products))
   end
 
 end

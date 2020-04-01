@@ -29,4 +29,12 @@ module ActionsHelper
     @events
   end
 
+  def product_permitted_params(products)
+    permitted_params=[]
+    products.each do |product|
+      permitted_params.push product.name
+    end
+    return permitted_params
+  end
+
 end
