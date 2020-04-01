@@ -1,4 +1,7 @@
 <%= content_tag :h3, "#{@employee.name}: #{working?(@employee)}" %>
+<% if !@employee.working? %>
+  <%= link_to 'Start new work session for this employee', '#' %>
+<% end %>
 
 <div>
   <div>
