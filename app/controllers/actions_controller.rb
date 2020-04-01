@@ -8,10 +8,11 @@ class ActionsController < ApplicationController
     @user=User.find(params[:user_id])
     @products=@user.products
     @active_products=@user.active_products
+    @warehouse_products=warehouse_products(@user)
+    @warehouses=@user.warehouses
   end
 
   def warehouse
-    @warehouses=@user.warehouses
   end
 
   def events
@@ -42,12 +43,12 @@ class ActionsController < ApplicationController
   end
 
   def create_throwing
-    
+
   end
 
 
   def shopping_params
-    params.require(:shopping_event).permit(product_permitted_params(@products))
+    params.require(:shopping_event).permit(product_permitted_params(@active_products))
   end
 
 end
