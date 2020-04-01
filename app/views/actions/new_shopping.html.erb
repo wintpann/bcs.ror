@@ -1,8 +1,8 @@
 <h2>New shopping</h2>
 <%= render 'shared/errors' %>
-<% if @products && @products.any? %>
+<% if @active_products && @active_products.any? %>
   <%= form_for :shopping_event, url: user_create_shopping_path do |f| %>
-    <% @products.each do |product| %>
+    <% @active_products.each do |product| %>
       <div>
         <%= f.label product.name %>
         <%= f.text_field product.name, value: 0%>

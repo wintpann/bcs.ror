@@ -7,6 +7,7 @@ class ActionsController < ApplicationController
   before_action do
     @user=User.find(params[:user_id])
     @products=@user.products
+    @active_products=@user.active_products
   end
 
   def warehouse
