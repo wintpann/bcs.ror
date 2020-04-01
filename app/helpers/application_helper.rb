@@ -5,11 +5,11 @@ module ApplicationHelper
   end
 
   def to_local(time)
-    time.to_s[0...-7]
+    time.localtime.to_s[0...-9]
   end
 
   def to_local_time(time)
-    time.to_s[11...-7]
+    time.localtime.to_s[11...-9]
   end
 
   def toggle_active(model)
