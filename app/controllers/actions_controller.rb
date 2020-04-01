@@ -63,20 +63,26 @@ class ActionsController < ApplicationController
   def create_work_session
     @employee=Employee.find(params[:employee_id])
 
-    if empty_product_params?(work_session_params)
-      @errors=['Work session must contain at least one product']
-      render 'new_work_session'
-    elsif more_than_there_is?(warehouses: @warehouses, product_params: work_session_params)
-      @errors=['You can not give more than you have']
-      render 'new_work_session'
+    if @employee.working? || !@employee.active
+      flash[:danger]='Employee is already working or inactive!'
+      redirect_to user_path(params[:user_id])
     else
-      @employee.start_work_session
 
-      event=@user.all_events.create(event_type: 'giving')
-      create_new_giving(event: event, giving_params: work_session_params, employee: @employee)
-      redirect_to '#'
+      if empty_product_params?(work_session_params)
+        @errors=['Work session must contain at least one product']
+        render 'new_work_session'
+      elsif more_than_there_is?(warehouses: @warehouses, product_params: work_session_params)
+        @errors=['You can not give more than you have']
+        render 'new_work_session'
+      else
+        @employee.start_work_session
+
+        event=@user.all_events.create(event_type: 'giving')
+        create_new_giving(event: event, giving_params: work_session_params, employee: @employee)
+        redirect_to user_events_path
+      end
+
     end
-
   end
 
   def shopping_params
