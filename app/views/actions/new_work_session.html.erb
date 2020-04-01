@@ -1,10 +1,15 @@
-<% if @employee.working? %>
-  <h3>You can not start new work session. Finish old one first</h3>
+<% if !@employee.active? %>
+  <h3>You can not start new work session with deleted employee</h3>
 <% elsif !@warehouses.any?%>
   <h3>There are nothing in your warehouse</h3>
 <% else %>
+  <% if @employee.working? %>
+    <%= content_tag :h3, "Add stuff to #{@employee.name}" %>
+  <% else %>
+    <%= content_tag :h3, "New work session for #{@employee.name}" %>
+  <% end %>
 
-  <%= content_tag :h3, "New work session for #{@employee.name}" %>
+
   <%= render 'shared/errors' %>
 
   <%= form_for :work_session, url: user_employee_create_work_session_path(params[:user_id], params[:employee_id]) do |f| %>

@@ -1,6 +1,8 @@
 <%= content_tag :h3, "#{@employee.name}: #{working?(@employee)}" %>
 <% if !@employee.working? %>
   <%= link_to 'Start new work session for this employee', user_employee_new_work_session_path(params[:user_id], params[:id]) %>
+<% else %>
+  <%= link_to 'Add stuff for this employee', user_employee_new_work_session_path(params[:user_id], params[:id]) %>
 <% end %>
 
 <div>

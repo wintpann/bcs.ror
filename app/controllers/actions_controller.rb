@@ -63,13 +63,13 @@ class ActionsController < ApplicationController
   def create_work_session
     @employee=Employee.find(params[:employee_id])
 
-    if @employee.working? || !@employee.active
+    if !@employee.active
       flash[:danger]='Employee is already working or inactive!'
       redirect_to user_path(params[:user_id])
     else
 
       if empty_product_params?(work_session_params)
-        @errors=['Work session must contain at least one product']
+        @errors=['Stuff must contain at least one product']
         render 'new_work_session'
       elsif more_than_there_is?(warehouses: @warehouses, product_params: work_session_params)
         @errors=['You can not give more than you have']
