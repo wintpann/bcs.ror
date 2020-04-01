@@ -22,6 +22,9 @@ class Warehouse < ApplicationRecord
         end
         self.create!(amount: options[:amount], product: options[:product])
       end
+
+      changed_warehouse=self.find_by_product_name(options[:product].name)
+      changed_warehouse.destroy if changed_warehouse.amount == 0
     end
 
     def have_product?(product)
