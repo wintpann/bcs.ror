@@ -14,20 +14,32 @@ class Employee < ApplicationRecord
   validates :fixed_rate, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :interest_rate, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: 100 }
 
-  def self.active
-    self.all.where(active: true)
+  class << self
+
+    def active
+      self.all.where(active: true)
+    end
+
+    def inactive
+      self.all.where(active: false)
+    end
+
+    def active_working
+      self.active.where(working: true)
+    end
+
+    def active_free
+      self.active.where(working: false)
+    end
+
   end
 
-  def self.inactive
-    self.all.where(active: false)
+  def start_work_session
+    self.update_attribute(:working, true)
   end
 
-  def self.active_working
-    self.active.where(working: true)
-  end
-
-  def self.active_free
-    self.active.where(working: false)
+  def end_work_session
+    self.update_attribute(:working, false)
   end
 
 end
