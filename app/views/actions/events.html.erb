@@ -1,9 +1,9 @@
 <% if @events && @events.any? %>
-  <% @events.each do |key, value| %>
+  <% @events.each do |date, events| %>
   <div>
-    <%= content_tag :h4, key %>
+    <%= content_tag :h4, date %>
     <ul>
-      <% value.each do |event| %>
+      <% events.each do |event| %>
         <li>
 
           <% if event.event_type=='shopping' %>
