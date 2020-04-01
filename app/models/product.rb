@@ -9,6 +9,7 @@ class Product < ApplicationRecord
   belongs_to :user
   has_one :warehouse
   has_many :shopping_events
+  has_many :throwing_events
 
   validates :name, presence: true, uniqueness: {case_sensitive: false}
   validates :price_in, numericality: { only_integer: true, greater_than: 0 }
