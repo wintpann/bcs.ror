@@ -66,10 +66,10 @@ taras.employees.create!(name: 'Danil',
 first_event=taras.all_events.create(event_type: 'shopping')
 
 first_event.shopping_events.create_event(product: orange,
-                                        amount: 5 )
+                                        amount: 50 )
 
 first_event.shopping_events.create_event(product: bread,
-                                        amount: 18 )
+                                        amount: 180 )
 
 first_event.shopping_events.create_event(product: sunflower,
-                                        amount: 7 )
+                                        amount: 70 )

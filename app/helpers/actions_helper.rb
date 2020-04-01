@@ -6,7 +6,6 @@ module ActionsHelper
     return (at_least_one_product ? false : true)
   end
 
-
   def to_hash_of_arrays_by_date(all_events)
     @events={}
 
@@ -37,11 +36,42 @@ module ActionsHelper
     @events
   end
 
+  def warehouses_products(warehouses)
+    products=[]
+    warehouses.each do |warehouse|
+      products << warehouse.product
+    end
+    return products
+  end
+
+  def empty_throwing?(throwing_params)
+    throwing_params.each { |key, value| return false if value.to_i > 0 }
+    return true
+  end
+
+  def more_than_there_is?(options={})
+    options[:throwing_params].each do |key, value|
+      if value.to_i > options[:warehouses].find_by_product_name(key).amount
+        return true
+      end
+    end
+    return false
+  end
+
   def create_new_shopping(options={})
     options[:shopping_params].each do |key, value|
       if value.to_i > 0
         product=Product.find_by(name: key)
         options[:event].shopping_events.create_event(product: product, amount: value.to_i)
+      end
+    end
+  end
+
+  def create_new_throwing(options={})
+    options[:throwing_params].each do |key, value|
+      if value.to_i > 0
+        product=Product.find_by(name: key)
+        options[:event].throwing_events.create_event(product: product, amount: value.to_i)
       end
     end
   end

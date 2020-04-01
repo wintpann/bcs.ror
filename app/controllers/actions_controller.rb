@@ -8,8 +8,8 @@ class ActionsController < ApplicationController
     @user=User.find(params[:user_id])
     @products=@user.products
     @active_products=@user.active_products
-    @warehouse_products=warehouse_products(@user)
     @warehouses=@user.warehouses
+    @warehouses_products=warehouses_products(@warehouses)
   end
 
   def warehouse
@@ -43,12 +43,26 @@ class ActionsController < ApplicationController
   end
 
   def create_throwing
-
+    if empty_throwing?(throwing_params)
+      @errors=['Throw must contain at least one product']
+      render 'new_throwing'
+    elsif more_than_there_is?(warehouses: @warehouses, throwing_params: throwing_params)
+      @errors=['You can not throw more than you have']
+      render 'new_throwing'
+    else
+      event=@user.all_events.create(event_type: 'throwing')
+      create_new_throwing(event: event, throwing_params: throwing_params)
+      redirect_to user_warehouse_path
+    end
   end
 
 
   def shopping_params
     params.require(:shopping_event).permit(product_permitted_params(@active_products))
+  end
+
+  def throwing_params
+    params.require(:throwing_event).permit(product_permitted_params(@warehouses_products))
   end
 
 end

@@ -1,34 +1,44 @@
 class Warehouse < ApplicationRecord
-
-  def self.error
-    @@error
-  end
-
   belongs_to :product
   belongs_to :user
 
-  def self.change_product(options={})
-    if (warehouse=self.have_product?(options[:product]))
-      if (warehouse.amount+options[:amount]) < 0
-        @@error="There cannot be a negative number of products"
-        return
-      end
-      warehouse.update_attribute(:amount, warehouse.amount+options[:amount])
-    else
-      if options[:amount] < 0
-        @@error="There cannot be a negative number of products"
-        return
-      end
-      self.create!(amount: options[:amount], product: options[:product])
-    end
-  end
+  class << self
 
-  def self.have_product?(product)
-    self.all.each do |warehouse|
-      return warehouse if warehouse.product_id==product.id
+    def error
+      @@error
     end
 
-    return false
+    def change_product(options={})
+      if (warehouse=self.have_product?(options[:product]))
+        if (warehouse.amount+options[:amount]) < 0
+          @@error="There cannot be a negative number of products"
+          return
+        end
+        warehouse.update_attribute(:amount, warehouse.amount+options[:amount])
+      else
+        if options[:amount] < 0
+          @@error="There cannot be a negative number of products"
+          return
+        end
+        self.create!(amount: options[:amount], product: options[:product])
+      end
+    end
+
+    def have_product?(product)
+      self.all.each do |warehouse|
+        return warehouse if warehouse.product_id==product.id
+      end
+
+      return false
+    end
+
+    def find_by_product_name(product_name)
+      self.all.each do |warehouse|
+        return warehouse if warehouse.product.name==product_name
+      end
+      return nil
+    end
+
   end
 
 end

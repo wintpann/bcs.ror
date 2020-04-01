@@ -1,0 +1,16 @@
+<h2>Throwing</h2>
+<%= render 'shared/errors' %>
+<% if @warehouses && @warehouses.any? %>
+  <%= form_for :throwing_event, url: user_create_throwing_path do |f| %>
+    <% @warehouses.each do |warehouse| %>
+      <div>
+        <%= f.label warehouse.product.name %>
+        <%= f.text_field warehouse.product.name, value: 0%>
+        <%= content_tag :span, "of #{warehouse.amount}" %>
+      </div>
+    <% end %>
+    <%= f.submit 'Throw' %>
+  <% end %>
+<% else %>
+  <h3>Nothing to throw</h3>
+<% end %>

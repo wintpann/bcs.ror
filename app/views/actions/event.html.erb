@@ -1,3 +1,5 @@
 <% if @event.event_type=='shopping' %>
   <%= render 'shopping', event: @event %>
+<% elsif @event.event_type=='throwing' %>
+  <%= render 'throwing', event: @event %>
 <% end %>
