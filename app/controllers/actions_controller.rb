@@ -79,7 +79,7 @@ class ActionsController < ApplicationController
 
         event=@user.all_events.create(event_type: 'giving')
         create_new_giving(event: event, giving_params: work_session_params, employee: @employee)
-        redirect_to user_events_path
+        redirect_to user_employee_path(params[:user_id], params[:employee_id])
       end
 
     end
