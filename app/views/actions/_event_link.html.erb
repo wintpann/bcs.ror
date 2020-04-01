@@ -28,4 +28,14 @@
     </a>
   </div>
 
+<% elsif event.event_type=='start_work_session' %>
+
+  <div class="event start_work_session_event">
+    <div>
+      <%= content_tag :span, to_local_time(event.created_at), class: 'time' %>
+      <%= content_tag :span, "Start work session for:", class: 'type' %>
+      <%= content_tag :span, event.start_work_session_event.employee.name, class: 'employee' %>
+    </div>
+  </div>
+
 <% end %>
