@@ -1,12 +1,11 @@
 class User < ApplicationRecord
+  before_save :before_saving
   attr_accessor :remember_token
 
   has_many :products
   has_many :employees
   has_many :warehouses
   has_many :all_events
-
-  before_save :before_saving
 
   def before_saving
     self.email.strip!
@@ -29,6 +28,10 @@ class User < ApplicationRecord
 
     def new_token
       SecureRandom.urlsafe_base64
+    end
+
+    def all_without_admins
+      self.all.where(admin: false)
     end
   end
 
@@ -54,10 +57,6 @@ class User < ApplicationRecord
     Product.inactive.where(user_id: self.id)
   end
 
-  def self.all_without_admins
-    self.all.where(admin: false)
-  end
-
   def active_employees
     Employee.active.where(user_id: self.id)
   end
@@ -76,7 +75,9 @@ class User < ApplicationRecord
 
   def destroy_user
     self.warehouses.destroy_all
-    self.all_events.each { |event| event.shopping_events.destroy_all }
+    self.all_events.each do |event|
+      event.shopping_events.destroy_all
+    end
     self.all_events.destroy_all
     self.employees.destroy_all
     self.products.destroy_all
