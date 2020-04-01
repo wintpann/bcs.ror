@@ -26,9 +26,7 @@ class ActionsController < ApplicationController
   end
 
   def create_shopping
-    at_least_one_product=false
-    shopping_params.each { |key, value| at_least_one_product=true if value.strip.to_i > 0 }
-    if !at_least_one_product
+    if empty_purchase?(shopping_params)
       @errors=['Purchase must contain at least one product']
       render 'new_shopping'
       return

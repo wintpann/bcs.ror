@@ -1,4 +1,12 @@
 module ActionsHelper
+
+  def empty_purchase?(shopping_params)
+    at_least_one_product=false
+    shopping_params.each { |key, value| at_least_one_product=true if value.strip.to_i > 0 }
+    return (at_least_one_product ? false : true)
+  end
+
+
   def to_hash_of_arrays_by_date(all_events)
     @events={}
 
