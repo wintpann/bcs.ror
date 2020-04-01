@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_01_170603) do
+ActiveRecord::Schema.define(version: 2020_04_01_172534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,18 @@ ActiveRecord::Schema.define(version: 2020_04_01_170603) do
     t.boolean "active", default: true
     t.index ["name"], name: "index_employees_on_name", unique: true
     t.index ["user_id"], name: "index_employees_on_user_id"
+  end
+
+  create_table "giving_events", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.integer "amount"
+    t.bigint "employee_id", null: false
+    t.bigint "all_event_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["all_event_id"], name: "index_giving_events_on_all_event_id"
+    t.index ["employee_id"], name: "index_giving_events_on_employee_id"
+    t.index ["product_id"], name: "index_giving_events_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -105,6 +117,9 @@ ActiveRecord::Schema.define(version: 2020_04_01_170603) do
   add_foreign_key "employee_stocks", "employees"
   add_foreign_key "employee_stocks", "products"
   add_foreign_key "employees", "users"
+  add_foreign_key "giving_events", "all_events"
+  add_foreign_key "giving_events", "employees"
+  add_foreign_key "giving_events", "products"
   add_foreign_key "products", "users"
   add_foreign_key "shopping_events", "all_events"
   add_foreign_key "shopping_events", "products"

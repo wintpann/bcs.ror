@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product: one
+  amount: 1
+  employee: one
+  all_event: one
+
+two:
+  product: two
+  amount: 1
+  employee: two
+  all_event: two

@@ -10,6 +10,7 @@ class Product < ApplicationRecord
   has_one :warehouse
   has_many :shopping_events
   has_many :throwing_events
+  has_many :giving_events
   has_many :employee_stocks
 
   validates :name, presence: true, uniqueness: {case_sensitive: false}

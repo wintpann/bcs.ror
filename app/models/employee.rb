@@ -8,6 +8,7 @@ class Employee < ApplicationRecord
 
   belongs_to :user
   has_many :employee_stocks
+  has_many :giving_events
 
   validates :name, presence: true, uniqueness: {case_sensitive: false}
   validates :fixed_rate, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
