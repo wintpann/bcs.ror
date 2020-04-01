@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   post 'signup'=>'users#create'
   resources :users, only: [:edit, :update, :show, :index, :destroy] do
     resources :products
-    resources :employees
+    resources :employees do
+      get 'new_work_session' => 'actions#new_work_session', as: :new_work_session
+      post 'create_work_session' => 'actions#create_work_session', as: :create_work_session
+    end
     get 'deleted_products' => 'products#inactive', as: :inactive_products
     get 'deleted_employees' => 'employees#inactive', as: :inactive_employees
     get 'warehouse' => 'actions#warehouse', as: :warehouse

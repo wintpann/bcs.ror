@@ -44,13 +44,13 @@ module ActionsHelper
     return products
   end
 
-  def empty_throwing?(throwing_params)
-    throwing_params.each { |key, value| return false if value.to_i > 0 }
+  def empty_product_params?(product_params)
+    product_params.each { |key, value| return false if value.to_i > 0 }
     return true
   end
 
   def more_than_there_is?(options={})
-    options[:throwing_params].each do |key, value|
+    options[:product_params].each do |key, value|
       if value.to_i > options[:warehouses].find_by_product_name(key).amount
         return true
       end
@@ -72,6 +72,15 @@ module ActionsHelper
       if value.to_i > 0
         product=Product.find_by(name: key)
         options[:event].throwing_events.create_event(product: product, amount: value.to_i)
+      end
+    end
+  end
+
+  def create_new_giving(options={})
+    options[:giving_params].each do |key, value|
+      if value.to_i > 0
+        product=Product.find_by(name: key)
+        options[:event].giving_events.create_event(product: product, amount: value.to_i, employee: options[:employee])
       end
     end
   end

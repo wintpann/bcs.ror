@@ -43,10 +43,10 @@ class ActionsController < ApplicationController
   end
 
   def create_throwing
-    if empty_throwing?(throwing_params)
+    if empty_product_params?(throwing_params)
       @errors=['Throw must contain at least one product']
       render 'new_throwing'
-    elsif more_than_there_is?(warehouses: @warehouses, throwing_params: throwing_params)
+    elsif more_than_there_is?(warehouses: @warehouses, product_params: throwing_params)
       @errors=['You can not throw more than you have']
       render 'new_throwing'
     else
@@ -56,6 +56,28 @@ class ActionsController < ApplicationController
     end
   end
 
+  def new_work_session
+    @employee=Employee.find(params[:employee_id])
+  end
+
+  def create_work_session
+    @employee=Employee.find(params[:employee_id])
+
+    if empty_product_params?(work_session_params)
+      @errors=['Work session must contain at least one product']
+      render 'new_work_session'
+    elsif more_than_there_is?(warehouses: @warehouses, product_params: work_session_params)
+      @errors=['You can not give more than you have']
+      render 'new_work_session'
+    else
+      @employee.start_work_session
+
+      event=@user.all_events.create(event_type: 'giving')
+      create_new_giving(event: event, giving_params: work_session_params, employee: @employee)
+      redirect_to '#'
+    end
+
+  end
 
   def shopping_params
     params.require(:shopping_event).permit(product_permitted_params(@active_products))
@@ -63,6 +85,10 @@ class ActionsController < ApplicationController
 
   def throwing_params
     params.require(:throwing_event).permit(product_permitted_params(@warehouses_products))
+  end
+
+  def work_session_params
+    params.require(:work_session).permit(product_permitted_params(@warehouses_products))
   end
 
 end
