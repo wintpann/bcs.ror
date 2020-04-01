@@ -75,7 +75,11 @@ class ActionsController < ApplicationController
         @errors=['You can not give more than you have']
         render 'new_work_session'
       else
-        @employee.start_work_session
+        if !@employee.working?
+          start_work_session_event=@user.all_events.create(event_type: 'start_work_session')
+          start_work_session_event.create_start_work_session_event(employee: @employee)
+          @employee.start_work_session
+        end
 
         event=@user.all_events.create(event_type: 'giving')
         create_new_giving(event: event, giving_params: work_session_params, employee: @employee)
