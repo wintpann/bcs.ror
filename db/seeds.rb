@@ -64,7 +64,6 @@ danil=taras.employees.create!(name: 'Danil',
                         active: false )
 
 first_event=taras.all_events.create(event_type: 'shopping')
-first_event.update_attribute(:created_at, '2020-03-28 22:38:39')
 
 first_event.shopping_events.create_event(product: orange,
                                         amount: 50 )
@@ -76,7 +75,6 @@ first_event.shopping_events.create_event(product: sunflower,
                                         amount: 70 )
 
 second_event=taras.all_events.create(event_type: 'throwing')
-second_event.update_attribute(:created_at, '2020-03-28 22:38:39')
 
 second_event.throwing_events.create_event(product: orange,
                                         amount: 20 )
@@ -85,12 +83,11 @@ second_event.throwing_events.create_event(product: bread,
                                         amount: 10 )
 
 third_event=taras.all_events.create(event_type: 'start_work_session')
-third_event.update_attribute(:created_at, '2020-03-29 22:38:39')
 
 third_event.create_start_work_session_event(employee: misha)
+misha.start_work_session
 
 fourth_event=taras.all_events.create(event_type: 'giving')
-fourth_event.update_attribute(:created_at, '2020-03-29 22:38:39')
 
 fourth_event.giving_events.create_event(product: orange, amount: 4, employee: misha)
 
