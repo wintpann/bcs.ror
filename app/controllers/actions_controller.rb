@@ -23,7 +23,7 @@ class ActionsController < ApplicationController
 
   def events
     all_events=@user.all_events.all.order(created_at: :desc)
-    @events=to_hash_of_arrays_by_date(all_events)
+    @events=( all_events.any? ? to_hash_of_arrays_by_date(all_events) : nil )
   end
 
   def event
