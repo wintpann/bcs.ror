@@ -128,13 +128,16 @@ class ActionsController < ApplicationController
           end
           # selling
           selling_event=@user.all_events.create(event_type: 'selling')
-          create_new_selling(event: selling_event, employee: @employee)
+          create_new_selling(selling_event: selling_event, employee: @employee)
           if @employee.fixed_rate>0 || @employee.interest_rate>0
             # salary
             employee_salary_event=@user.all_events.create(event_type: 'employee_salary')
             create_new_employee_salary(employee_salary_event: employee_salary_event, selling_event: selling_event, employee: @employee)
           end
           # end_work_session
+          end_work_session_event=@user.all_events.create(event_type: 'end_work_session')
+          create_new_end_work_session(employee: @employee, end_work_session_event: end_work_session_event)
+          redirect_to user_employee_path(params[:user_id], params[:employee_id])
         else
           event=@user.all_events.create(event_type: 'taking')
           create_new_taking(event: event, taking_params: ending_params, employee: @employee)

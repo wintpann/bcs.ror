@@ -115,13 +115,18 @@ module ActionsHelper
 
   def create_new_selling(options={})
     options[:employee].employee_stocks do |stock|
-      options[:event].selling_events.create_event(product: stock.product, amount: stock.amount, employee: stock.employee)
+      options[:selling_event].selling_events.create_event(product: stock.product, amount: stock.amount, employee: stock.employee)
     end
     options[:employee].employee_stocks.destroy_all
   end
 
   def create_new_employee_salary(options={})
-    options[:employee_salary_event].create_employee_salary_event(employee: options[:employee], sum: options[:selling_event].sum)
+    options[:employee_salary_event].create_employee_salary_event(employee: options[:employee], sum: (options[:selling_event].sum.to_f*options[:employee].interest_rate.to_f/100)+options[:employee].fixed_rate)
+  end
+
+  def create_new_end_work_session(options={})
+    options[:end_work_session_event].create_end_work_session_event(employee: options[:employee])
+    options[:employee].end_work_session
   end
 
   def product_permitted_params(products)
