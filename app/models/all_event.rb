@@ -6,4 +6,6 @@ class AllEvent < ApplicationRecord
   has_many :selling_events
   has_many :taking_events
   has_one :start_work_session_event
+  has_one :end_work_session_event
+  has_one :employee_salary_event
 end

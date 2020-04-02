@@ -129,7 +129,14 @@ class ActionsController < ApplicationController
         # create_new_giving(event: event, giving_params: work_session_params, employee: @employee)
         # redirect_to user_employee_path(params[:user_id], params[:employee_id])
         if work_session_ends
-          # end
+          if !empty_product_params?(ending_params)
+            # taking
+          end
+          # selling
+          if @employee.fixed_rate>0 || @employee.interest_rate>0
+            # salary
+          end
+          # end_work_session
         else
           event=@user.all_events.create(event_type: 'taking')
           create_new_taking(event: event, taking_params: ending_params, employee: @employee)

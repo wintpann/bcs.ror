@@ -12,6 +12,8 @@ class Employee < ApplicationRecord
   has_many :selling_events
   has_many :taking_events
   has_many :start_work_session_events
+  has_many :end_work_session_events
+  has_many :employee_salary_events
 
   validates :name, presence: true, uniqueness: {case_sensitive: false}
   validates :fixed_rate, numericality: { only_integer: true, greater_than_or_equal_to: 0 }

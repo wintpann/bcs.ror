@@ -42,8 +42,8 @@ misha=taras.employees.create!(name: 'Misha',
                         interest_rate: 10 )
 
 dima=taras.employees.create!(name: 'Dima',
-                        fixed_rate: 800,
-                        interest_rate: 2 )
+                        fixed_rate: 0,
+                        interest_rate: 0 )
 
 lera=taras.employees.create!(name: 'Lera',
                         fixed_rate: 600,
