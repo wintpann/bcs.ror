@@ -123,14 +123,16 @@ class ActionsController < ApplicationController
         if work_session_ends
           if !empty_product_params?(ending_params)
             #taking
-            event=@user.all_events.create(event_type: 'taking')
-            create_new_taking(event: event, taking_params: ending_params, employee: @employee)
+            taking_event=@user.all_events.create(event_type: 'taking')
+            create_new_taking(event: taking_event, taking_params: ending_params, employee: @employee)
           end
           # selling
-          event=@user.all_events.create(event_type: 'selling')
-          create_new_selling(event: event, employee: @employee)
+          selling_event=@user.all_events.create(event_type: 'selling')
+          create_new_selling(event: selling_event, employee: @employee)
           if @employee.fixed_rate>0 || @employee.interest_rate>0
             # salary
+            employee_salary_event=@user.all_events.create(event_type: 'employee_salary')
+            create_new_employee_salary(employee_salary_event: employee_salary_event, selling_event: selling_event, employee: @employee)
           end
           # end_work_session
         else

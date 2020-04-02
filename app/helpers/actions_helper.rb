@@ -120,6 +120,10 @@ module ActionsHelper
     options[:employee].employee_stocks.destroy_all
   end
 
+  def create_new_employee_salary(options={})
+    options[:employee_salary_event].create_employee_salary_event(employee: options[:employee], sum: options[:selling_event].sum)
+  end
+
   def product_permitted_params(products)
     permitted_params=[]
     products.each do |product|
