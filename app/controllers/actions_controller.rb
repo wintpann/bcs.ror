@@ -125,14 +125,18 @@ class ActionsController < ApplicationController
             #taking
             taking_event=@user.all_events.create(event_type: 'taking')
             create_new_taking(event: taking_event, taking_params: ending_params, employee: @employee)
+            @stocks.reload
           end
-          # selling
-          selling_event=@user.all_events.create(event_type: 'selling')
-          create_new_selling(selling_event: selling_event, employee: @employee)
-          if @employee.fixed_rate>0 || @employee.interest_rate>0
-            # salary
-            employee_salary_event=@user.all_events.create(event_type: 'employee_salary')
-            create_new_employee_salary(employee_salary_event: employee_salary_event, selling_event: selling_event, employee: @employee)
+          if @stocks.any?
+            # selling
+            selling_event=@user.all_events.create(event_type: 'selling')
+            create_new_selling(selling_event: selling_event, employee: @employee)
+            selling_event.reload
+            if @employee.fixed_rate>0 || @employee.interest_rate>0
+              # salary
+              employee_salary_event=@user.all_events.create(event_type: 'employee_salary')
+              create_new_employee_salary(employee_salary_event: employee_salary_event, selling_event: selling_event, employee: @employee)
+            end
           end
           # end_work_session
           end_work_session_event=@user.all_events.create(event_type: 'end_work_session')

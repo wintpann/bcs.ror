@@ -1,0 +1,22 @@
+<%= content_tag :h3, "Selling stuff: #{event.selling_events.first.employee.name}" %>
+<div><%=to_local(event.created_at)%></div>
+<table border="1">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <% event.selling_events.all.each do |stuff| %>
+    <tr>
+      <td>
+        <%= stuff.product.name %>
+      </td>
+      <td>
+        <%= stuff.amount %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<div><%="Total: +#{event.sum} rub"%></div>
