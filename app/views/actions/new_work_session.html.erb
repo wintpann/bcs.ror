@@ -1,5 +1,5 @@
 <% if !@employee.active? %>
-  <h3>You can not start new work session with deleted employee</h3>
+  <h3>You can not start new work session for deleted employee</h3>
 <% elsif !@warehouses.any?%>
   <h3>There are nothing in your warehouse</h3>
 <% else %>
