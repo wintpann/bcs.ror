@@ -9,6 +9,7 @@ class Employee < ApplicationRecord
   belongs_to :user
   has_many :employee_stocks
   has_many :giving_events
+  has_many :selling_events
   has_many :taking_events
   has_many :start_work_session_events
 

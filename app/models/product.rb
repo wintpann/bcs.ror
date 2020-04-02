@@ -9,6 +9,7 @@ class Product < ApplicationRecord
   belongs_to :user
   has_one :warehouse
   has_many :shopping_events
+  has_many :selling_events
   has_many :throwing_events
   has_many :giving_events
   has_many :taking_events
