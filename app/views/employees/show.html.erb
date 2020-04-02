@@ -8,7 +8,10 @@
       <h3>In stock:</h3>
       <%= render 'stocks', stocks: @employee.employee_stocks %>
     </div>
-    <%= link_to 'Add stuff for this employee', user_employee_new_work_session_path(params[:user_id], params[:id]) %>
+    <div>
+      <div><%= link_to 'Add stuff for this employee', user_employee_new_work_session_path(params[:user_id], params[:id]) %></div>
+      <div><%= link_to 'End work session / Take stuff from this employee', user_employee_end_work_session_path(params[:user_id], params[:id]) %></div>
+    </div>
   <% end %>
 <% end %>
 

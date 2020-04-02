@@ -23,8 +23,9 @@
   <div class="event giving_event">
     <a href= <%=user_event_path(user_id, event.id)%> >
       <%= content_tag :span, to_local_time(event.created_at), class: 'time' %>
-      <%= content_tag :span, "Giving to: #{event.giving_events.first.employee.name}", class: 'type' %>
-      <%= content_tag :span, "-#{event.sum} rub", class: 'sum' %>
+      <%= content_tag :span, "Giving to:", class: 'type' %>
+      <%= content_tag :span, event.giving_events.first.employee.name, class: 'employee' %>
+      <%= content_tag :span, "#{event.sum} rub", class: 'sum' %>
     </a>
   </div>
 
@@ -36,6 +37,19 @@
       <%= content_tag :span, "Start work session for:", class: 'type' %>
       <%= content_tag :span, event.start_work_session_event.employee.name, class: 'employee' %>
     </div>
+  </div>
+
+<% elsif event.event_type=='taking' %>
+
+  <div class="event taking_event">
+    <a href= <%=user_event_path(user_id, event.id)%> >
+      <div>
+        <%= content_tag :span, to_local_time(event.created_at), class: 'time' %>
+        <%= content_tag :span, "Taking stuff from:", class: 'type' %>
+        <%= content_tag :span, event.taking_events.first.employee.name, class: 'employee' %>
+        <%= content_tag :span, "#{event.sum} rub", class: 'sum' %>
+      </div>
+    </a>
   </div>
 
 <% end %>

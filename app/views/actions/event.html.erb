@@ -6,4 +6,6 @@
   <%= render 'giving', event: @event %>
 <% elsif @event.event_type=='start_work_session' %>
   <%= render plain: "No additional info" %>
+<% elsif @event.event_type=='taking' %>
+  <%= render 'taking', event: @event %>
 <% end %>

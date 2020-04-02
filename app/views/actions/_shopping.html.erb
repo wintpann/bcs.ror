@@ -1,6 +1,12 @@
 <h2>Shopping</h2>
 <div><%=to_local(event.created_at)%></div>
 <table border="1">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
   <% event.shopping_events.all.each do |purchase| %>
     <tr>
       <td>
@@ -13,4 +19,4 @@
   <% end %>
 </table>
 
-<div><%="Total: #{event.sum} rub"%></div>
+<div><%="Total: -#{event.sum} rub"%></div>

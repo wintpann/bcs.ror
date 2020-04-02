@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     resources :employees do
       get 'new_work_session' => 'actions#new_work_session', as: :new_work_session
       post 'create_work_session' => 'actions#create_work_session', as: :create_work_session
+      get 'end_work_session' => 'actions#end_work_session', as: :end_work_session
+      post 'delete_work_session' => 'actions#delete_work_session', as: :delete_work_session
     end
     get 'deleted_products' => 'products#inactive', as: :inactive_products
     get 'deleted_employees' => 'employees#inactive', as: :inactive_employees

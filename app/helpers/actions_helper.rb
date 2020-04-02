@@ -49,6 +49,16 @@ module ActionsHelper
     return true
   end
 
+  def ending_params(ending_params)
+    ending_params.delete('end_work_session')
+    return ending_params
+  end
+
+  def work_session_ends?(params)
+    return true if params['end_work_session']=='1'
+    return false
+  end
+
   def more_than_there_is?(options={})
     options[:product_params].each do |key, value|
       if value.to_i > options[:warehouses].find_by_product_name(key).amount
@@ -56,6 +66,15 @@ module ActionsHelper
       end
     end
     return false
+  end
+
+  def all_of?(options={})
+    options[:product_params].each do |key, value|
+      if value.to_i != options[:warehouses].find_by_product_name(key).amount
+        return false
+      end
+    end
+    return true
   end
 
   def create_new_shopping(options={})
@@ -81,6 +100,15 @@ module ActionsHelper
       if value.to_i > 0
         product=Product.find_by(name: key)
         options[:event].giving_events.create_event(product: product, amount: value.to_i, employee: options[:employee])
+      end
+    end
+  end
+
+  def create_new_taking(options={})
+    options[:taking_params].each do |key, value|
+      if value.to_i > 0
+        product=Product.find_by(name: key)
+        options[:event].taking_events.create_event(product: product, amount: value.to_i, employee: options[:employee])
       end
     end
   end

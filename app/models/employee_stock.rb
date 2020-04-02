@@ -22,6 +22,8 @@ class EmployeeStock < ApplicationRecord
         end
         self.create!(amount: options[:amount], product: options[:product])
       end
+      changed_stock=self.find_by_product_name(options[:product].name)
+      changed_stock.destroy if changed_stock.amount == 0
     end
 
     def have_product?(product)
@@ -30,6 +32,13 @@ class EmployeeStock < ApplicationRecord
       end
 
       return false
+    end
+
+    def find_by_product_name(product_name)
+      self.all.each do |stock|
+        return stock if stock.product.name==product_name
+      end
+      return nil
     end
 
   end

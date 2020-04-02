@@ -1,4 +1,4 @@
-<%= content_tag :h3, "Giving stuff to #{event.giving_events.first.employee.name}" %>
+<%= content_tag :h3, "Taking stuff from #{event.taking_events.first.employee.name}" %>
 <div><%=to_local(event.created_at)%></div>
 <table border="1">
   <thead>
@@ -7,7 +7,7 @@
       <th>Amount</th>
     </tr>
   </thead>
-  <% event.giving_events.all.each do |stuff| %>
+  <% event.taking_events.all.each do |stuff| %>
     <tr>
       <td>
         <%= stuff.product.name %>
