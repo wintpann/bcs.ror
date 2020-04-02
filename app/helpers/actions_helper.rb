@@ -113,6 +113,13 @@ module ActionsHelper
     end
   end
 
+  def create_new_selling(options={})
+    options[:employee].employee_stocks do |stock|
+      options[:event].selling_events.create_event(product: stock.product, amount: stock.amount, employee: stock.employee)
+    end
+    options[:employee].employee_stocks.destroy_all
+  end
+
   def product_permitted_params(products)
     permitted_params=[]
     products.each do |product|

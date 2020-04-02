@@ -119,20 +119,16 @@ class ActionsController < ApplicationController
         @errors=['You can not take all stuff without ending work session']
         render 'end_work_session'
       else
-        # if !@employee.working?
-        #   start_work_session_event=@user.all_events.create(event_type: 'start_work_session')
-        #   start_work_session_event.create_start_work_session_event(employee: @employee)
-        #   @employee.start_work_session
-        # end
-        #
-        # event=@user.all_events.create(event_type: 'giving')
-        # create_new_giving(event: event, giving_params: work_session_params, employee: @employee)
-        # redirect_to user_employee_path(params[:user_id], params[:employee_id])
+
         if work_session_ends
           if !empty_product_params?(ending_params)
-            # taking
+            #taking
+            event=@user.all_events.create(event_type: 'taking')
+            create_new_taking(event: event, taking_params: ending_params, employee: @employee)
           end
           # selling
+          event=@user.all_events.create(event_type: 'selling')
+          create_new_selling(event: event, employee: @employee)
           if @employee.fixed_rate>0 || @employee.interest_rate>0
             # salary
           end
