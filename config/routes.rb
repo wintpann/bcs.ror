@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     post 'create_fare' => 'actions#create_fare', as: :create_fare
     get 'new_tax' => 'actions#new_tax', as: :new_tax
     post 'create_tax' => 'actions#create_tax', as: :create_tax
+    get 'new_equipment' => 'actions#new_equipment', as: :new_equipment
+    post 'create_equipment' => 'actions#create_equipment', as: :create_equipment
   end
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'

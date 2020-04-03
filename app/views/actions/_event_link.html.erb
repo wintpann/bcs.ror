@@ -108,4 +108,15 @@
     </div>
   </div>
 
+<% elsif event.event_type=='equipment' %>
+
+  <div class="event equipment_event">
+    <div>
+      <%= content_tag :span, to_local_time(event.created_at), class: 'time' %>
+      <%= content_tag :span, "Equipment purchase:", class: 'type' %>
+      <%= content_tag :span, "- #{event.equipment_event.sum} rub", class: 'sum' %>
+      <%= content_tag :span, "«#{event.equipment_event.description}»", class: 'description' %>
+    </div>
+  </div>
+
 <% end %>

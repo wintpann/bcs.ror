@@ -30,4 +30,13 @@ class AllEvent < ApplicationRecord
     end
     self.update_attribute(:sum, tax_event.sum)
   end
+
+  def create_equipment(options={})
+    if options[:description].empty?
+      equipment_event=self.create_equipment_event(sum: options[:sum])
+    else
+      equipment_event=self.create_equipment_event(sum: options[:sum], description: options[:description])
+    end
+    self.update_attribute(:sum, equipment_event.sum)
+  end
 end

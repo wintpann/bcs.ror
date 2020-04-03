@@ -184,6 +184,22 @@ class ActionsController < ApplicationController
     end
   end
 
+  def new_equipment
+  end
+
+  def create_equipment
+    equipment_params=expense_params('new_equipment')
+    temp_event=EquipmentEvent.new(description: equipment_params[:description], sum: equipment_params[:sum], all_event: AllEvent.new(event_type: 'temp'))
+    if temp_event.valid?
+      equipment_event=@user.all_events.create(event_type: 'equipment')
+      equipment_event.create_equipment(description: equipment_params[:description], sum: equipment_params[:sum])
+      redirect_to user_events_path
+    else
+      @errors=temp_event.errors.full_messages
+      render 'new_equipment'
+    end
+  end
+
   def expense_params(type)
     params.require(type).permit(:sum, :description)
   end
