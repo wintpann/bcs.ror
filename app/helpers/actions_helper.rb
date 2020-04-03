@@ -38,9 +38,7 @@ module ActionsHelper
 
   def warehouses_products(warehouses)
     products=[]
-    warehouses.each do |warehouse|
-      products << warehouse.product
-    end
+    warehouses.each { |warehouse| products << warehouse.product }
     return products
   end
 
@@ -131,7 +129,8 @@ module ActionsHelper
   end
 
   def create_new_employee_salary(options={})
-    head_salary_event=options[:salary_event].create_employee_salary_event(employee: options[:employee], sum: (options[:employee].fixed_rate+options[:employee].interest_rate.to_f/100*options[:selling_event].sum) )
+    salary=(options[:employee].fixed_rate+options[:employee].interest_rate.to_f/100*options[:selling_event].sum)
+    head_salary_event=options[:salary_event].create_employee_salary_event(employee: options[:employee], sum: salary )
     options[:salary_event].update_attribute(:sum, head_salary_event.sum)
   end
 
