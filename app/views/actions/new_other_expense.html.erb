@@ -1,0 +1,5 @@
+<h2>New other expense</h2>
+<%= render 'shared/errors' %>
+<%= form_for :new_other_expense, url: user_create_other_expense_path do |f| %>
+  <%= render 'expense', f: f, options: {} %>
+<% end %>

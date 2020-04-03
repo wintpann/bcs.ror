@@ -119,4 +119,15 @@
     </div>
   </div>
 
+<% elsif event.event_type=='other_expense' %>
+
+  <div class="event other_expense_event">
+    <div>
+      <%= content_tag :span, to_local_time(event.created_at), class: 'time' %>
+      <%= content_tag :span, "Other expense:", class: 'type' %>
+      <%= content_tag :span, "- #{event.other_expense_event.sum} rub", class: 'sum' %>
+      <%= content_tag :span, "«#{event.other_expense_event.description}»", class: 'description' %>
+    </div>
+  </div>
+
 <% end %>

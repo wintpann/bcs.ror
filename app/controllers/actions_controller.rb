@@ -200,6 +200,22 @@ class ActionsController < ApplicationController
     end
   end
 
+  def new_other_expense
+  end
+
+  def create_other_expense
+    other_expense_params=expense_params('new_other_expense')
+    temp_event=OtherExpenseEvent.new(description: other_expense_params[:description], sum: other_expense_params[:sum], all_event: AllEvent.new(event_type: 'temp'))
+    if temp_event.valid?
+      other_expense_event=@user.all_events.create(event_type: 'other_expense')
+      other_expense_event.create_other_expense(description: other_expense_params[:description], sum: other_expense_params[:sum])
+      redirect_to user_events_path
+    else
+      @errors=temp_event.errors.full_messages
+      render 'new_other_expense'
+    end
+  end
+
   def expense_params(type)
     params.require(type).permit(:sum, :description)
   end

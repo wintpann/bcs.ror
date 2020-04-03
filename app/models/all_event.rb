@@ -39,4 +39,9 @@ class AllEvent < ApplicationRecord
     end
     self.update_attribute(:sum, equipment_event.sum)
   end
+
+  def create_other_expense(options={})
+    other_expense_event=self.create_other_expense_event(sum: options[:sum], description: options[:description])
+    self.update_attribute(:sum, other_expense_event.sum)
+  end
 end
