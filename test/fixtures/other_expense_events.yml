@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  all_event: one
+  description: MyString
+  sum: 1
+
+two:
+  all_event: two
+  description: MyString
+  sum: 1

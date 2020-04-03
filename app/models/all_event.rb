@@ -11,4 +11,5 @@ class AllEvent < ApplicationRecord
   has_one :fare_event
   has_one :tax_event
   has_one :equipment_event
+  has_one :other_expense_event
 end

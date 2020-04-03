@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_03_072308) do
+ActiveRecord::Schema.define(version: 2020_04_03_072835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,15 @@ ActiveRecord::Schema.define(version: 2020_04_03_072308) do
     t.index ["employee_id"], name: "index_end_work_session_events_on_employee_id"
   end
 
+  create_table "equipment_events", force: :cascade do |t|
+    t.bigint "all_event_id", null: false
+    t.string "description", default: ""
+    t.integer "sum"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["all_event_id"], name: "index_equipment_events_on_all_event_id"
+  end
+
   create_table "fare_events", force: :cascade do |t|
     t.bigint "all_event_id", null: false
     t.string "description"
@@ -86,6 +95,15 @@ ActiveRecord::Schema.define(version: 2020_04_03_072308) do
     t.index ["all_event_id"], name: "index_giving_events_on_all_event_id"
     t.index ["employee_id"], name: "index_giving_events_on_employee_id"
     t.index ["product_id"], name: "index_giving_events_on_product_id"
+  end
+
+  create_table "other_expense_events", force: :cascade do |t|
+    t.bigint "all_event_id", null: false
+    t.string "description"
+    t.integer "sum"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["all_event_id"], name: "index_other_expense_events_on_all_event_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -191,10 +209,12 @@ ActiveRecord::Schema.define(version: 2020_04_03_072308) do
   add_foreign_key "employees", "users"
   add_foreign_key "end_work_session_events", "all_events"
   add_foreign_key "end_work_session_events", "employees"
+  add_foreign_key "equipment_events", "all_events"
   add_foreign_key "fare_events", "all_events"
   add_foreign_key "giving_events", "all_events"
   add_foreign_key "giving_events", "employees"
   add_foreign_key "giving_events", "products"
+  add_foreign_key "other_expense_events", "all_events"
   add_foreign_key "products", "users"
   add_foreign_key "selling_events", "all_events"
   add_foreign_key "selling_events", "employees"
