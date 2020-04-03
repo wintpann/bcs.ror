@@ -9,4 +9,5 @@ class AllEvent < ApplicationRecord
   has_one :end_work_session_event
   has_one :employee_salary_event
   has_one :fare_event
+  has_one :tax_event
 end
