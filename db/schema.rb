@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_02_141044) do
+ActiveRecord::Schema.define(version: 2020_04_03_071634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,15 @@ ActiveRecord::Schema.define(version: 2020_04_02_141044) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["all_event_id"], name: "index_end_work_session_events_on_all_event_id"
     t.index ["employee_id"], name: "index_end_work_session_events_on_employee_id"
+  end
+
+  create_table "fare_events", force: :cascade do |t|
+    t.bigint "all_event_id", null: false
+    t.string "description"
+    t.integer "sum"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["all_event_id"], name: "index_fare_events_on_all_event_id"
   end
 
   create_table "giving_events", force: :cascade do |t|
@@ -173,6 +182,7 @@ ActiveRecord::Schema.define(version: 2020_04_02_141044) do
   add_foreign_key "employees", "users"
   add_foreign_key "end_work_session_events", "all_events"
   add_foreign_key "end_work_session_events", "employees"
+  add_foreign_key "fare_events", "all_events"
   add_foreign_key "giving_events", "all_events"
   add_foreign_key "giving_events", "employees"
   add_foreign_key "giving_events", "products"
