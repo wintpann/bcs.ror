@@ -1,0 +1,7 @@
+<% stuff.each do |item| %>
+  <div>
+    <%= f.label item.product.name %>
+    <%= f.text_field item.product.name, value: 0 %>
+    <%= content_tag :span, "of #{item.amount}" %>
+  </div>
+<% end %>

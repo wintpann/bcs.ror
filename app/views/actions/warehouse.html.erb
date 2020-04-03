@@ -1,23 +1,6 @@
 <h2>Warehouse</h2>
 <% if @warehouses && @warehouses.any? %>
-  <table border="1">
-    <thead>
-      <tr>
-        <th>Product</th>
-        <th>Amount</th>
-      </tr>
-    </thead>
-    <% @warehouses.each do |item| %>
-      <tr>
-        <td>
-          <%=item.product.name%>
-        </td>
-        <td>
-          <%=item.amount%>
-        </td>
-      </tr>
-    <% end %>
-  </table>
+  <%= render 'shared/stocks', stocks: @warehouses %>
 <% else %>
   <h3>There is no any products in warehouse</h3>
 <% end %>

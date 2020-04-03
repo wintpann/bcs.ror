@@ -1,16 +1,4 @@
 <h2>Throwing</h2>
 <div><%=to_local(event.created_at)%></div>
-<table border="1">
-  <% event.throwing_events.all.each do |throw| %>
-    <tr>
-      <td>
-        <%= throw.product.name %>
-      </td>
-      <td>
-        <%= throw.amount %>
-      </td>
-    </tr>
-  <% end %>
-</table>
-
+<%= render 'shared/stocks', stocks: event.throwing_events %>
 <div><%="Total: -#{event.sum} rub"%></div>

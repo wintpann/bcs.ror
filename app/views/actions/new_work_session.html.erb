@@ -13,13 +13,7 @@
   <%= render 'shared/errors' %>
 
   <%= form_for :work_session, url: user_employee_create_work_session_path(params[:user_id], params[:employee_id]) do |f| %>
-    <% @warehouses.each do |warehouse| %>
-      <div>
-        <%= f.label warehouse.product.name %>
-        <%= f.text_field warehouse.product.name, value: 0 %>
-        <%= content_tag :span, "of #{warehouse.amount} in stock" %>
-      </div>
-    <% end %>
+    <%= render 'select_stuff', stuff: @warehouses, f: f %>
     <%= f.submit 'Start' %>
   <% end %>
 

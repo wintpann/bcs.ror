@@ -6,7 +6,7 @@
   <% else %>
     <div>
       <h3>In stock:</h3>
-      <%= render 'stocks', stocks: @employee.employee_stocks %>
+      <%= render 'shared/stocks', stocks: @employee.employee_stocks %>
     </div>
     <div>
       <div><%= link_to 'Add stuff for this employee', user_employee_new_work_session_path(params[:user_id], params[:id]) %></div>

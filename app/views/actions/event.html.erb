@@ -4,12 +4,10 @@
   <%= render 'throwing', event: @event %>
 <% elsif @event.event_type=='giving' %>
   <%= render 'giving', event: @event %>
-<% elsif @event.event_type=='start_work_session' %>
-  <%= render plain: "No additional info" %>
 <% elsif @event.event_type=='taking' %>
   <%= render 'taking', event: @event %>
 <% elsif @event.event_type=='selling' %>
   <%= render 'selling', event: @event %>
-<% elsif @event.event_type=='employee_salary' %>
+<% else %>
   <%= render plain: "No additional info" %>
 <% end %>
