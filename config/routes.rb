@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     post 'throwing' => 'actions#create_throwing', as: :create_throwing
     get 'events' => 'actions#events', as: :events
     get 'event/:id' => 'actions#event', as: :event
+    get 'new_fare' => 'actions#new_fare', as: :new_fare
+    post 'create_fare' => 'actions#create_fare', as: :create_fare
   end
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'

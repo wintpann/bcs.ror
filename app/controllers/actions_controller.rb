@@ -152,6 +152,27 @@ class ActionsController < ApplicationController
     end
   end
 
+  def new_fare
+  end
+
+  def create_fare
+    fare_params=expense_params('new_fare')
+    temp_event=FareEvent.new(description: fare_params[:description], sum: fare_params[:sum], all_event: AllEvent.new(event_type: 'temp'))
+    if temp_event.valid?
+      fare_event=@user.all_events.create(event_type: 'fare')
+      fare_event.create_fare(description: fare_params[:description], sum: fare_params[:sum])
+      redirect_to user_events_path
+    else
+      @errors=temp_event.errors.full_messages
+      render 'new_fare'
+    end
+
+  end
+
+  def expense_params(type)
+    params.require(type).permit(:sum, :description)
+  end
+
   def shopping_params
     params.require(:shopping_event).permit(product_permitted_params(@active_products))
   end

@@ -1,0 +1,9 @@
+<div>
+  <%= f.label :description, "Description #{options[:description]}" %>
+  <%= f.text_field :description %>
+</div>
+<div>
+  <%= f.label :sum %>
+  <%= f.text_field :sum, value: 0 %>
+</div>
+<%= f.submit 'Pay' %>
