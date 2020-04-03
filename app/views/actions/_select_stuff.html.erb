@@ -1,6 +1,6 @@
 <% stuff.each do |item| %>
   <div>
-    <%= f.label item.product.name %>
+    <%= link_to item.product.name, user_product_path(params[:user_id], item.product.id) %>
     <%= f.text_field item.product.name, value: 0 %>
     <%= content_tag :span, "of #{item.amount}" %>
   </div>
