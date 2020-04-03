@@ -78,7 +78,7 @@ module ActionsHelper
   end
 
   def create_new_shopping(options={})
-    options[:shopping_params].each do |key, value|
+    options[:params].each do |key, value|
       if value.to_i > 0
         product=Product.find_by(name: key)
         options[:event].shopping_events.create_event(product: product, amount: value.to_i)
@@ -87,7 +87,7 @@ module ActionsHelper
   end
 
   def create_new_throwing(options={})
-    options[:throwing_params].each do |key, value|
+    options[:params].each do |key, value|
       if value.to_i > 0
         product=Product.find_by(name: key)
         options[:event].throwing_events.create_event(product: product, amount: value.to_i)
@@ -96,7 +96,7 @@ module ActionsHelper
   end
 
   def create_new_giving(options={})
-    options[:giving_params].each do |key, value|
+    options[:params].each do |key, value|
       if value.to_i > 0
         product=Product.find_by(name: key)
         options[:event].giving_events.create_event(product: product, amount: value.to_i, employee: options[:employee])
@@ -105,7 +105,7 @@ module ActionsHelper
   end
 
   def create_new_taking(options={})
-    options[:taking_params].each do |key, value|
+    options[:params].each do |key, value|
       if value.to_i > 0
         product=Product.find_by(name: key)
         options[:event].taking_events.create_event(product: product, amount: value.to_i, employee: options[:employee])
@@ -113,21 +113,35 @@ module ActionsHelper
     end
   end
 
+  def was_selling?(user)
+    return true if user.all_events.last.event_type=='selling'
+    return false
+  end
+
+  def has_single_salary?(employee)
+    return true if employee.fixed_rate>0 && employee.interest_rate>0
+    return false
+  end
+
   def create_new_selling(options={})
     options[:employee].employee_stocks.each do |stock|
-      options[:selling_event].selling_events.create_event(product: stock.product, amount: stock.amount, employee: stock.employee)
+      options[:event].selling_events.create_event(product: stock.product, amount: stock.amount, employee: stock.employee)
     end
     options[:employee].employee_stocks.destroy_all
   end
 
   def create_new_employee_salary(options={})
-    salary_event=options[:employee_salary_event].create_employee_salary_event(employee: options[:employee], sum: (options[:employee].fixed_rate+options[:employee].interest_rate.to_f/100*options[:selling_event].sum) )
-    options[:employee_salary_event].update_attribute(:sum, salary_event.sum)
+    head_salary_event=options[:salary_event].create_employee_salary_event(employee: options[:employee], sum: (options[:employee].fixed_rate+options[:employee].interest_rate.to_f/100*options[:selling_event].sum) )
+    options[:salary_event].update_attribute(:sum, head_salary_event.sum)
   end
 
   def create_new_end_work_session(options={})
-    options[:end_work_session_event].create_end_work_session_event(employee: options[:employee])
+    options[:event].create_end_work_session_event(employee: options[:employee])
     options[:employee].end_work_session
+  end
+
+  def temp_event(options={})
+    options[:class].new(description: options[:params][:description], sum: options[:params][:sum], all_event: AllEvent.new(event_type: 'temp'))
   end
 
   def product_permitted_params(products)

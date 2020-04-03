@@ -12,7 +12,7 @@ class ActionsController < ApplicationController
     @warehouses_products=warehouses_products(@warehouses)
   end
 
-  def get_employee
+  def get_employee_with_stocks
     @employee=Employee.find(params[:employee_id])
     @stocks=@employee.employee_stocks
     @stocks_products=warehouses_products(@stocks)
@@ -40,8 +40,8 @@ class ActionsController < ApplicationController
       return
     end
 
-    event=@user.all_events.create(event_type: 'shopping')
-    create_new_shopping(event: event, shopping_params: shopping_params)
+    head_shopping_event=@user.all_events.create(event_type: 'shopping')
+    create_new_shopping(event: head_shopping_event, params: shopping_params)
     redirect_to user_warehouse_path
   end
 
@@ -56,8 +56,8 @@ class ActionsController < ApplicationController
       @errors=['You can not throw more than you have']
       render 'new_throwing'
     else
-      event=@user.all_events.create(event_type: 'throwing')
-      create_new_throwing(event: event, throwing_params: throwing_params)
+      head_throwing_event=@user.all_events.create(event_type: 'throwing')
+      create_new_throwing(event: head_throwing_event, params: throwing_params)
       redirect_to user_warehouse_path
     end
   end
@@ -72,84 +72,90 @@ class ActionsController < ApplicationController
     if !@employee.active?
       flash[:danger]='Employee is inactive!'
       redirect_to user_path(params[:user_id])
-    else
-
-      if empty_product_params?(work_session_params)
-        @errors=['Stuff must contain at least one product']
-        render 'new_work_session'
-      elsif more_than_there_is?(warehouses: @warehouses, product_params: work_session_params)
-        @errors=['You can not give more than you have']
-        render 'new_work_session'
-      else
-        if !@employee.working?
-          start_work_session_event=@user.all_events.create(event_type: 'start_work_session')
-          start_work_session_event.create_start_work_session_event(employee: @employee)
-          @employee.start_work_session
-        end
-
-        event=@user.all_events.create(event_type: 'giving')
-        create_new_giving(event: event, giving_params: work_session_params, employee: @employee)
-        redirect_to user_employee_path(params[:user_id], params[:employee_id])
-      end
-
+      return
     end
+
+    if empty_product_params?(work_session_params)
+      @errors=['Stuff must contain at least one product']
+      render 'new_work_session'
+      return
+    end
+
+    if more_than_there_is?(warehouses: @warehouses, product_params: work_session_params)
+      @errors=['You can not give more than you have']
+      render 'new_work_session'
+      return
+    end
+
+    if !@employee.working?
+      head_start_work_session_event=@user.all_events.create(event_type: 'start_work_session')
+      head_start_work_session_event.create_start_work_session_event(employee: @employee)
+      @employee.start_work_session
+    end
+
+    head_giving_event=@user.all_events.create(event_type: 'giving')
+    create_new_giving(event: head_giving_event, params: work_session_params, employee: @employee)
+    redirect_to user_employee_path(params[:user_id], params[:employee_id])
   end
 
   def end_work_session
-    get_employee
+    get_employee_with_stocks
   end
 
   def delete_work_session
-    get_employee
+    get_employee_with_stocks
     work_session_ends=work_session_ends?(end_work_session_params(@stocks_products))
     ending_params=ending_params(end_work_session_params(@stocks_products))
 
     if !@employee.working?
       flash[:danger]="The employee isn't working!"
       redirect_to user_path(params[:user_id])
-    else
-
-      if empty_product_params?(ending_params) && !work_session_ends
-        @errors=['Stuff must contain at least one product']
-        render 'end_work_session'
-      elsif more_than_there_is?(warehouses: @stocks, product_params: ending_params)
-        @errors=['You can not take more than there is']
-        render 'end_work_session'
-      elsif all_of?(warehouses: @stocks, product_params: ending_params) && !work_session_ends
-        @errors=['You can not take all stuff without ending work session']
-        render 'end_work_session'
-      else
-
-        if work_session_ends
-          if !empty_product_params?(ending_params)
-            #taking
-            taking_event=@user.all_events.create(event_type: 'taking')
-            create_new_taking(event: taking_event, taking_params: ending_params, employee: @employee)
-            @stocks.reload
-          end
-          if @stocks.any?
-            # selling
-            selling_event=@user.all_events.create(event_type: 'selling')
-            create_new_selling(selling_event: selling_event, employee: @employee)
-            selling_event.reload
-            if @employee.fixed_rate>0 || @employee.interest_rate>0
-              # salary
-              employee_salary_event=@user.all_events.create(event_type: 'employee_salary')
-              create_new_employee_salary(employee_salary_event: employee_salary_event, selling_event: selling_event, employee: @employee)
-            end
-          end
-          # end_work_session
-          end_work_session_event=@user.all_events.create(event_type: 'end_work_session')
-          create_new_end_work_session(employee: @employee, end_work_session_event: end_work_session_event)
-          redirect_to user_employee_path(params[:user_id], params[:employee_id])
-        else
-          event=@user.all_events.create(event_type: 'taking')
-          create_new_taking(event: event, taking_params: ending_params, employee: @employee)
-          redirect_to user_employee_path(params[:user_id], params[:employee_id])
-        end
-
-      end
+      return
     end
+
+    if empty_product_params?(ending_params) && !work_session_ends
+      @errors=['Stuff must contain at least one product']
+      render 'end_work_session'
+      return
+    end
+
+    if more_than_there_is?(warehouses: @stocks, product_params: ending_params)
+      @errors=['You can not take more than there is']
+      render 'end_work_session'
+      return
+    end
+
+    if all_of?(warehouses: @stocks, product_params: ending_params) && !work_session_ends
+      @errors=['You can not take all stuff without ending work session']
+      render 'end_work_session'
+      return
+    end
+
+    if !empty_product_params?(ending_params)
+      head_taking_event=@user.all_events.create(event_type: 'taking')
+      create_new_taking(event: head_taking_event, params: ending_params, employee: @employee)
+      @stocks.reload
+    end
+
+    if !work_session_ends
+      redirect_to user_employee_path(params[:user_id], params[:employee_id])
+      return
+    end
+
+    if @stocks.any?
+      head_selling_event=@user.all_events.create(event_type: 'selling')
+      create_new_selling(event: head_selling_event, employee: @employee)
+      head_selling_event.reload
+    end
+
+    if was_selling?(@user) && has_single_salary?(@employee)
+      head_employee_salary_event=@user.all_events.create(event_type: 'employee_salary')
+      create_new_employee_salary(salary_event: head_employee_salary_event, selling_event: head_selling_event, employee: @employee)
+    end
+
+    head_end_work_session_event=@user.all_events.create(event_type: 'end_work_session')
+    create_new_end_work_session(employee: @employee, event: head_end_work_session_event)
+    redirect_to user_employee_path(params[:user_id], params[:employee_id])
   end
 
   def new_fare
@@ -157,10 +163,10 @@ class ActionsController < ApplicationController
 
   def create_fare
     fare_params=expense_params('new_fare')
-    temp_event=FareEvent.new(description: fare_params[:description], sum: fare_params[:sum], all_event: AllEvent.new(event_type: 'temp'))
+    temp_event=temp_event(class: FareEvent, params: fare_params)
     if temp_event.valid?
-      fare_event=@user.all_events.create(event_type: 'fare')
-      fare_event.create_fare(description: fare_params[:description], sum: fare_params[:sum])
+      head_fare_event=@user.all_events.create(event_type: 'fare')
+      head_fare_event.create_fare(description: fare_params[:description], sum: fare_params[:sum])
       redirect_to user_events_path
     else
       @errors=temp_event.errors.full_messages
@@ -173,10 +179,10 @@ class ActionsController < ApplicationController
 
   def create_tax
     tax_params=expense_params('new_tax')
-    temp_event=TaxEvent.new(description: tax_params[:description], sum: tax_params[:sum], all_event: AllEvent.new(event_type: 'temp'))
+    temp_event=temp_event(class: TaxEvent, params: tax_params)
     if temp_event.valid?
-      tax_event=@user.all_events.create(event_type: 'tax')
-      tax_event.create_tax(description: tax_params[:description], sum: tax_params[:sum])
+      head_tax_event=@user.all_events.create(event_type: 'tax')
+      head_tax_event.create_tax(description: tax_params[:description], sum: tax_params[:sum])
       redirect_to user_events_path
     else
       @errors=temp_event.errors.full_messages
@@ -189,10 +195,10 @@ class ActionsController < ApplicationController
 
   def create_equipment
     equipment_params=expense_params('new_equipment')
-    temp_event=EquipmentEvent.new(description: equipment_params[:description], sum: equipment_params[:sum], all_event: AllEvent.new(event_type: 'temp'))
+    temp_event=temp_event(class: EquipmentEvent, params: equipment_params)
     if temp_event.valid?
-      equipment_event=@user.all_events.create(event_type: 'equipment')
-      equipment_event.create_equipment(description: equipment_params[:description], sum: equipment_params[:sum])
+      head_equipment_event=@user.all_events.create(event_type: 'equipment')
+      head_equipment_event.create_equipment(description: equipment_params[:description], sum: equipment_params[:sum])
       redirect_to user_events_path
     else
       @errors=temp_event.errors.full_messages
@@ -205,10 +211,10 @@ class ActionsController < ApplicationController
 
   def create_other_expense
     other_expense_params=expense_params('new_other_expense')
-    temp_event=OtherExpenseEvent.new(description: other_expense_params[:description], sum: other_expense_params[:sum], all_event: AllEvent.new(event_type: 'temp'))
+    temp_event=temp_event(class: OtherExpenseEvent, params: other_expense_params)
     if temp_event.valid?
-      other_expense_event=@user.all_events.create(event_type: 'other_expense')
-      other_expense_event.create_other_expense(description: other_expense_params[:description], sum: other_expense_params[:sum])
+      head_other_expense_event=@user.all_events.create(event_type: 'other_expense')
+      head_other_expense_event.create_other_expense(description: other_expense_params[:description], sum: other_expense_params[:sum])
       redirect_to user_events_path
     else
       @errors=temp_event.errors.full_messages
