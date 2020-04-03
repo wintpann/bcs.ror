@@ -1,5 +1,5 @@
 module EmployeesHelper
-  def working?(employee)
+  def state(employee)
     employee.working? ? "IS WORKING" : "FREE"
   end
 end

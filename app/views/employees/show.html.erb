@@ -1,4 +1,4 @@
-<%= content_tag :h3, "#{@employee.name}: #{working?(@employee)}" %>
+<%= content_tag :h3, "#{@employee.name}: #{state(@employee)}" %>
 
 <% if @employee.active? %>
   <% if !@employee.working? %>

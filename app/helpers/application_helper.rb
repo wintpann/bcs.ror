@@ -13,8 +13,7 @@ module ApplicationHelper
   end
 
   def toggle_active(model)
-    new_value = model.active? ? false : true
-    model.update_attribute(:active, new_value)
+    model.toggle!(:active)
   end
 
   def toggler_action(model)
