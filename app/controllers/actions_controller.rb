@@ -166,7 +166,22 @@ class ActionsController < ApplicationController
       @errors=temp_event.errors.full_messages
       render 'new_fare'
     end
+  end
 
+  def new_tax
+  end
+
+  def create_tax
+    tax_params=expense_params('new_tax')
+    temp_event=TaxEvent.new(description: tax_params[:description], sum: tax_params[:sum], all_event: AllEvent.new(event_type: 'temp'))
+    if temp_event.valid?
+      tax_event=@user.all_events.create(event_type: 'tax')
+      tax_event.create_tax(description: tax_params[:description], sum: tax_params[:sum])
+      redirect_to user_events_path
+    else
+      @errors=temp_event.errors.full_messages
+      render 'new_tax'
+    end
   end
 
   def expense_params(type)

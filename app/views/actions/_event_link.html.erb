@@ -97,4 +97,15 @@
     </div>
   </div>
 
+<% elsif event.event_type=='tax' %>
+
+  <div class="event tax_event">
+    <div>
+      <%= content_tag :span, to_local_time(event.created_at), class: 'time' %>
+      <%= content_tag :span, "Tax payment:", class: 'type' %>
+      <%= content_tag :span, "- #{event.tax_event.sum} rub", class: 'sum' %>
+      <%= content_tag :span, "«#{event.tax_event.description}»", class: 'description' %>
+    </div>
+  </div>
+
 <% end %>

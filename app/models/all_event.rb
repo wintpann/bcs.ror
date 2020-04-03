@@ -21,4 +21,13 @@ class AllEvent < ApplicationRecord
     end
     self.update_attribute(:sum, fare_event.sum)
   end
+
+  def create_tax(options={})
+    if options[:description].empty?
+      tax_event=self.create_tax_event(sum: options[:sum])
+    else
+      tax_event=self.create_tax_event(sum: options[:sum], description: options[:description])
+    end
+    self.update_attribute(:sum, tax_event.sum)
+  end
 end

@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     get 'event/:id' => 'actions#event', as: :event
     get 'new_fare' => 'actions#new_fare', as: :new_fare
     post 'create_fare' => 'actions#create_fare', as: :create_fare
+    get 'new_tax' => 'actions#new_tax', as: :new_tax
+    post 'create_tax' => 'actions#create_tax', as: :create_tax
   end
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
