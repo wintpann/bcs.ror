@@ -22,8 +22,9 @@ class ActionsController < ApplicationController
   end
 
   def events
-    all_events=@user.all_events.all.order(created_at: :desc)
-    @events=( all_events.any? ? to_hash_of_arrays_by_date(all_events) : nil )
+    all_events=@user.all_events.all_desc.paginate(params[:page])
+    redirect_to user_events_path(params[:user_id], page: 1) if AllEvent.bad_page?
+    @events=( all_events ? to_hash_of_arrays_by_date(all_events) : nil )
   end
 
   def event

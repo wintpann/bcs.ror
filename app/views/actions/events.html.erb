@@ -1,4 +1,5 @@
 <% if @events && @events.any? %>
+  <%= render 'shared/paginator', model: AllEvent, common_link: user_events_path %>
   <% @events.each do |date, events| %>
   <div>
     <%= content_tag :h4, date %>

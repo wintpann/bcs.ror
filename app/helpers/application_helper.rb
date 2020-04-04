@@ -4,6 +4,12 @@ module ApplicationHelper
     pluralize(2, word.to_s)[2..-1]
   end
 
+  def get_links(model)
+    links={}
+    
+    return links
+  end
+
   def to_local(time)
     time.localtime.to_s[0...-9]
   end
