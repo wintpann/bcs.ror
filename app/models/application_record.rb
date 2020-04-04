@@ -2,7 +2,7 @@ class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
   @@bad_page=false
   @@current_page=0
-  @@links_count=8
+  @@links_count=9
   @@items_for_page=8
 
   def self.items_for_page
@@ -17,8 +17,17 @@ class ApplicationRecord < ActiveRecord::Base
     @@links_count/2
   end
 
+  def self.links_count
+    @@links_count
+  end
+
   def self.bad_page?
     @@bad_page
+  end
+
+  def self.valid_page?(num)
+    return true if num>=1 && num<=total_pages
+    return false
   end
 
   def self.current_page

@@ -1,4 +1,4 @@
 <% links=get_links(model) %>
-<% links[:first].upto(links[:last]) do |link| %>
+<% links[:left].upto(links[:right]) do |link| %>
   <%= link_to link, "#{common_link}?page=#{link}" %>
 <% end %>
