@@ -23,6 +23,11 @@ class ActionsController < ApplicationController
 
   def events
     all_events=@user.all_events.all_desc.paginate(params[:page])
+    if all_events.empty?
+      flash[:alert]="You don't have any events yet. Create first one!"
+      redirect_to user_path(params[:user_id])
+      return
+    end
     redirect_to user_events_path(params[:user_id], page: 1) if AllEvent.bad_page?
     @events=( all_events ? to_hash_of_arrays_by_date(all_events) : nil )
   end

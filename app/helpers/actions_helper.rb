@@ -7,6 +7,7 @@ module ActionsHelper
   end
 
   def to_hash_of_arrays_by_date(all_events)
+    return nil if !all_events.any?
     @events={}
 
     old_date=to_local(all_events.first.created_at)[0..-7]
