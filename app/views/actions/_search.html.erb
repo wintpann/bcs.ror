@@ -1,0 +1,43 @@
+<div>
+  <%= form_for :search, url: user_events_path, method: :get do |f|%>
+  <fieldset>
+    <legend>Filter</legend>
+    <div>
+      <%= f.label :type, "By type" %>
+      <%= f.select(:type) do %>
+        <% event_types.each do |s| %>
+          <%= content_tag :option, s[:name], value: s[:type], selected: type_selected(s) %>
+        <% end %>
+      <% end %>
+    </div>
+    <div>
+      <%= f.label :date, "From" %>
+      <%= f.date_field :date_from, value: AllEvent.all.first.created_at.strftime('%Y-%m-%d') %>
+
+      <%= f.label :date, "to" %>
+      <%= f.date_field :date_to, value: AllEvent.all.last.created_at.strftime('%Y-%m-%d') %>
+    </div>
+    <div>
+      <%= f.label :employee, "By employee" %>
+      <%= f.select(:employee) do %>
+        <%= content_tag :option, 'All', value: 'all'  %>
+        <% @user.active_employees.each do |e| %>
+          <%= content_tag :option, e.name, value: e.id, selected: employee_selected(e) %>
+        <% end %>
+      <% end %>
+    </div>
+  </fieldset>
+
+    <div>
+      <%= f.label :sort, "Sort by" %>
+      <%= f.select(:sort) do %>
+        <%= content_tag :option, 'Date (newest)', value: 'date_desc' %>
+        <%= content_tag :option, 'Date (oldest)', value: 'date_asc' %>
+        <%= content_tag :option, 'Sum (biggest)', value: 'sum_desc' %>
+        <%= content_tag :option, 'Sum (smallest)', value: 'sum_asc' %>
+      <% end %>
+    </div>
+    <%= hidden_field_tag :page, 1 %>
+    <%= f.submit 'Apply' %>
+  <% end %>
+</div>

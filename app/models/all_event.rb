@@ -45,8 +45,4 @@ class AllEvent < ApplicationRecord
     self.update_attribute(:sum, other_expense_event.sum)
   end
 
-  def self.all_desc()
-    self.all.order(created_at: :desc)
-  end
-
 end

@@ -22,13 +22,40 @@ class ActionsController < ApplicationController
   end
 
   def events
-    all_events=@user.all_events.all_desc.paginate(params[:page])
+    all_events=@user.all_events
+    all_events.paginate(params[:page])
+    search=params[:search]
+
     if all_events.empty?
       flash[:alert]="You don't have any events yet. Create first one!"
       redirect_to user_path(params[:user_id])
       return
     end
-    redirect_to user_events_path(params[:user_id], page: 1) if AllEvent.bad_page?
+
+    if AllEvent.bad_page? || !params[:search] || params[:search][:date_from].empty? || params[:search][:date_to].empty?
+      redirect_to user_events_path(params[:user_id], page: 1, search:{type: 'all', employee: 'all', date_from: AllEvent.first.created_at.strftime('%Y-%m-%d'), date_to: AllEvent.last.created_at.strftime('%Y-%m-%d'), sort: 'date_desc'})
+      return
+    end
+
+    if search[:type]!='all'
+      all_events=all_events.where(event_type: search[:type])
+    end
+
+    if search[:employee]!='all'
+      all_events=all_events.where(employee_id: search[:employee].to_i)
+    end
+
+    all_events=all_events.where('created_at >= ? and created_at <= ?', search[:date_from], search[:date_to].to_date+1.day)
+
+    if search[:sort]=='date_desc'
+      all_events=all_events.order(created_at: :desc)
+    elsif search[:sort]=='sum_desc'
+      all_events=all_events.order(sum: :desc)
+    elsif search[:sort]=='sum_asc'
+      all_events=all_events.order(sum: :asc)
+    end
+
+    all_events=all_events.paginate(params[:page])
     @events=( all_events ? to_hash_of_arrays_by_date(all_events) : nil )
   end
 
@@ -95,8 +122,7 @@ class ActionsController < ApplicationController
 
     if !@employee.working?
       head_start_work_session_event=@user.all_events.create(event_type: 'start_work_session')
-      head_start_work_session_event.create_start_work_session_event(employee: @employee)
-      @employee.start_work_session
+      create_new_start_work_session(employee: @employee, event: head_start_work_session_event)
     end
 
     head_giving_event=@user.all_events.create(event_type: 'giving')

@@ -1,5 +1,31 @@
 module ActionsHelper
 
+  def event_types
+    [
+      {name: "All", type: 'all'},
+      {name: 'Shopping', type: 'shopping'},
+      {name: 'Start work session', type: 'start_work_session'},
+      {name: 'Throwing', type: 'throwing'},
+      {name: 'Giving', type: 'giving'},
+      {name: 'End work session', type: 'end_work_session'},
+      {name: 'Selling', type: 'selling'},
+      {name: 'Taking', type: 'taking'},
+      {name: 'Salary', type: 'employee_salary'},
+      {name: 'Other expense', type: 'other_expense'},
+      {name: 'Transportation expense', type: 'fare'},
+      {name: 'Equipment expense', type: 'equipment'},
+      {name: 'Tax expense', type: 'tax'}
+    ]
+  end
+
+  def type_selected(s)
+    return true if params[:search][:type]==s[:type]
+  end
+
+  def employee_selected(e)
+    return true if params[:search][:employee]==e.id.to_s
+  end
+
   def empty_purchase?(shopping_params)
     at_least_one_product=false
     shopping_params.each { |key, value| at_least_one_product=true if value.strip.to_i > 0 }
@@ -101,6 +127,7 @@ module ActionsHelper
         options[:event].giving_events.create_event(product: product, amount: value.to_i, employee: options[:employee])
       end
     end
+    options[:event].update_attribute(:employee_id, options[:employee].id)
   end
 
   def create_new_taking(options={})
@@ -110,6 +137,7 @@ module ActionsHelper
         options[:event].taking_events.create_event(product: product, amount: value.to_i, employee: options[:employee])
       end
     end
+    options[:event].update_attribute(:employee_id, options[:employee].id)
   end
 
   def was_selling?(user)
@@ -127,17 +155,26 @@ module ActionsHelper
       options[:event].selling_events.create_event(product: stock.product, amount: stock.amount, employee: stock.employee)
     end
     options[:employee].employee_stocks.destroy_all
+    options[:event].update_attribute(:employee_id, options[:employee].id)
   end
 
   def create_new_employee_salary(options={})
     salary=(options[:employee].fixed_rate+options[:employee].interest_rate.to_f/100*options[:selling_event].sum)
     head_salary_event=options[:salary_event].create_employee_salary_event(employee: options[:employee], sum: salary )
     options[:salary_event].update_attribute(:sum, head_salary_event.sum)
+    options[:salary_event].update_attribute(:employee_id, options[:employee].id)
   end
 
   def create_new_end_work_session(options={})
     options[:event].create_end_work_session_event(employee: options[:employee])
     options[:employee].end_work_session
+    options[:event].update_attribute(:employee_id, options[:employee].id)
+  end
+
+  def create_new_start_work_session(options={})
+    options[:event].create_start_work_session_event(employee: options[:employee])
+    options[:employee].start_work_session
+    options[:event].update_attribute(:employee_id, options[:employee].id)
   end
 
   def temp_event(options={})
