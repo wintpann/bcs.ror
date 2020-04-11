@@ -31,10 +31,10 @@
     <div>
       <%= f.label :sort, "Sort by" %>
       <%= f.select(:sort) do %>
-        <%= content_tag :option, 'Date (newest)', value: 'date_desc' %>
-        <%= content_tag :option, 'Date (oldest)', value: 'date_asc' %>
-        <%= content_tag :option, 'Sum (biggest)', value: 'sum_desc' %>
-        <%= content_tag :option, 'Sum (smallest)', value: 'sum_asc' %>
+        <%= content_tag :option, 'Date (newest)', value: 'date_desc', selected: sort_selected('date_desc') %>
+        <%= content_tag :option, 'Date (oldest)', value: 'date_asc', selected: sort_selected('date_asc') %>
+        <%= content_tag :option, 'Sum (biggest)', value: 'sum_desc', selected: sort_selected('sum_desc') %>
+        <%= content_tag :option, 'Sum (smallest)', value: 'sum_asc', selected: sort_selected('sum_asc') %>
       <% end %>
     </div>
     <%= hidden_field_tag :page, 1 %>

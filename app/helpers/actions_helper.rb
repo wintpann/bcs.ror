@@ -26,6 +26,10 @@ module ActionsHelper
     return true if params[:search][:employee]==e.id.to_s
   end
 
+  def sort_selected(str)
+    return true if params[:search][:sort]==str
+  end
+
   def empty_purchase?(shopping_params)
     at_least_one_product=false
     shopping_params.each { |key, value| at_least_one_product=true if value.strip.to_i > 0 }
