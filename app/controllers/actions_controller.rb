@@ -22,11 +22,12 @@ class ActionsController < ApplicationController
   end
 
   def events
-    all_events=@user.all_events
-    all_events.paginate(params[:page])
+
+    @all_events=@user.all_events
+    @all_events.paginate(params[:page])
     search=params[:search]
 
-    if all_events.empty?
+    if @all_events.empty?
       flash[:alert]="You don't have any events yet. Create first one!"
       redirect_to user_path(params[:user_id])
       return
@@ -38,25 +39,27 @@ class ActionsController < ApplicationController
     end
 
     if search[:type]!='all'
-      all_events=all_events.where(event_type: search[:type])
+      @all_events=@all_events.where(event_type: search[:type])
     end
 
     if search[:employee]!='all'
-      all_events=all_events.where(employee_id: search[:employee].to_i)
+      @all_events=@all_events.where(employee_id: search[:employee].to_i)
     end
 
-    all_events=all_events.where('created_at >= ? and created_at <= ?', search[:date_from], search[:date_to].to_date+1.day)
+    @all_events=@all_events.where('created_at >= ? and created_at <= ?', search[:date_from], search[:date_to].to_date+1.day)
 
     if search[:sort]=='date_desc'
-      all_events=all_events.order(created_at: :desc)
+      @all_events=@all_events.order(created_at: :desc)
+    elsif search[:sort]=='date_asc'
+      @all_events=@all_events.order(created_at: :asc)
     elsif search[:sort]=='sum_desc'
-      all_events=all_events.order(sum: :desc)
+      @all_events=@all_events.order(sum: :desc)
     elsif search[:sort]=='sum_asc'
-      all_events=all_events.order(sum: :asc)
+      @all_events=@all_events.order(sum: :asc)
     end
 
-    all_events=all_events.paginate(params[:page])
-    @events=( all_events ? to_hash_of_arrays_by_date(all_events) : nil )
+    @events=@all_events.paginate(params[:page])
+    @events=( @events ? to_hash_of_arrays_by_date(@events) : nil )
   end
 
   def event

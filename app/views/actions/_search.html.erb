@@ -12,10 +12,10 @@
     </div>
     <div>
       <%= f.label :date, "From" %>
-      <%= f.date_field :date_from, value: AllEvent.all.first.created_at.strftime('%Y-%m-%d') %>
+      <%= f.date_field :date_from, value: params[:search][:date_from]||AllEvent.all.first.created_at.strftime('%Y-%m-%d') %>
 
       <%= f.label :date, "to" %>
-      <%= f.date_field :date_to, value: AllEvent.all.last.created_at.strftime('%Y-%m-%d') %>
+      <%= f.date_field :date_to, value: params[:search][:date_to]||AllEvent.all.last.created_at.strftime('%Y-%m-%d') %>
     </div>
     <div>
       <%= f.label :employee, "By employee" %>
