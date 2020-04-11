@@ -76,7 +76,32 @@ class User < ApplicationRecord
   def destroy_user
     self.warehouses.destroy_all
     self.all_events.each do |event|
-      event.shopping_events.destroy_all
+      case event.event_type
+      when 'shopping'
+        event.shopping_events.destroy_all
+      when 'start_work_session'
+        event.start_work_session_event.destroy
+      when 'throwing'
+        event.throwing_events.destroy_all
+      when 'giving'
+        event.giving_events.destroy_all
+      when 'end_work_session'
+        event.end_work_session_event.destroy
+      when 'selling'
+        event.selling_events.destroy_all
+      when 'taking'
+        event.taking_events.destroy_all
+      when 'employee_salary'
+        event.employee_salary_event.destroy
+      when 'other_expense'
+        event.other_expense_event.destroy
+      when 'fare'
+        event.fare_event.destroy
+      when 'equipment'
+        event.equipment_event.destroy
+      when 'tax'
+        event.tax_event.destroy
+      end
     end
     self.all_events.destroy_all
     self.employees.destroy_all
