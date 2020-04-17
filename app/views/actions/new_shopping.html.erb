@@ -1,4 +1,4 @@
-<h2 class="page-title">New shopping</h2>
+<h2 class="page-title">Новая закупка товара</h2>
 <%= render 'shared/errors' %>
 <% if @active_products && @active_products.any? %>
   <%= form_for :shopping_event, url: user_create_shopping_path do |f| %>
@@ -6,11 +6,11 @@
       <div>
         <%= link_to product.name, user_product_path(params[:user_id], product.id) %>
         <%= f.text_field product.name, value: 0%>
-        <%= content_tag :span, "unit(s) * #{product.price_in} rub" %>
+        <%= content_tag :span, "единиц * #{product.price_in} руб" %>
       </div>
     <% end %>
-    <%= f.submit 'Shop' %>
+    <%= f.submit 'Купить' %>
   <% end %>
 <% else %>
-  <h3>You don't have any products to shop</h3>
+  <h3>Нет продуктов для закупки</h3>
 <% end %>

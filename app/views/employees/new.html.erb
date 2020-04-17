@@ -1,6 +1,6 @@
-<h3>New employee</h3>
+<h3>Новый работник</h3>
 <%= render 'shared/errors' %>
 <%= form_for @employee, url: user_employees_path do |f| %>
   <%= render 'employee', f: f %>
-  <%= f.submit 'Add employee' %>
+  <%= f.submit 'Добавить работника' %>
 <% end %>

@@ -1,4 +1,4 @@
-<%= content_tag :h2, "Take stuff from #{@employee.name}", class: 'page-title' %>
+<%= content_tag :h2, "Получение товара от #{@employee.name}", class: 'page-title' %>
 <%= render 'shared/errors' %>
 <%= form_for :end_work_session, url: user_employee_delete_work_session_path do |f| %>
   <%= render 'select_stuff', stuff: @stocks, f: f %>

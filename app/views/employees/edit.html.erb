@@ -1,6 +1,6 @@
-<h3>Edit employee</h3>
+<h3 class="page-title">Редактировать работника</h3>
 <%= render 'shared/errors' %>
 <%= form_for @employee, url: user_employee_path do |f| %>
   <%= render 'employee', f: f %>
-  <%= f.submit 'Edit employee' %>
+  <%= f.submit 'Редактировать работника' %>
 <% end %>

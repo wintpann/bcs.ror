@@ -1,5 +1,5 @@
-<h2 class="page-title">New equipment purchase</h2>
+<h2 class="page-title">Новый расход на оборудование</h2>
 <%= render 'shared/errors' %>
 <%= form_for :new_equipment, url: user_create_equipment_path do |f| %>
-  <%= render 'expense', f: f, options: {description: '(optional)'} %>
+  <%= render 'expense', f: f, options: {description: '(не обязательно)'} %>
 <% end %>

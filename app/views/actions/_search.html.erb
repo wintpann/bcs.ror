@@ -1,9 +1,9 @@
 <div class="filter">
   <%= form_for :search, url: user_events_path, method: :get do |f|%>
   <fieldset>
-    <legend class="page-title">Filter</legend>
+    <legend class="page-title">Фильтр</legend>
     <div>
-      <%= f.label :type, "By type" %>
+      <%= f.label :type, "По типу" %>
       <%= f.select(:type) do %>
         <% event_types.each do |s| %>
           <%= content_tag :option, s[:name], value: s[:type], selected: type_selected(s) %>
@@ -11,16 +11,16 @@
       <% end %>
     </div>
     <div>
-      <%= f.label :date, "From" %>
+      <%= f.label :date, "От" %>
       <%= f.date_field :date_from, value: params[:search][:date_from]||AllEvent.all.first.created_at.strftime('%Y-%m-%d') %>
 
-      <%= f.label :date, "to" %>
+      <%= f.label :date, "до" %>
       <%= f.date_field :date_to, value: params[:search][:date_to]||AllEvent.all.last.created_at.strftime('%Y-%m-%d') %>
     </div>
     <div>
-      <%= f.label :employee, "By employee" %>
+      <%= f.label :employee, "По работнику" %>
       <%= f.select(:employee) do %>
-        <%= content_tag :option, 'All', value: 'all'  %>
+        <%= content_tag :option, 'Все', value: 'all'  %>
         <% @user.active_employees.each do |e| %>
           <%= content_tag :option, e.name, value: e.id, selected: employee_selected(e) %>
         <% end %>
@@ -29,15 +29,15 @@
   </fieldset>
 
     <div>
-      <%= f.label :sort, "Sort by" %>
+      <%= f.label :sort, "Сортировать по" %>
       <%= f.select(:sort) do %>
-        <%= content_tag :option, 'Date (newest)', value: 'date_desc', selected: sort_selected('date_desc') %>
-        <%= content_tag :option, 'Date (oldest)', value: 'date_asc', selected: sort_selected('date_asc') %>
-        <%= content_tag :option, 'Sum (biggest)', value: 'sum_desc', selected: sort_selected('sum_desc') %>
-        <%= content_tag :option, 'Sum (smallest)', value: 'sum_asc', selected: sort_selected('sum_asc') %>
+        <%= content_tag :option, 'дате (сперва новые)', value: 'date_desc', selected: sort_selected('date_desc') %>
+        <%= content_tag :option, 'дате (сперва старые)', value: 'date_asc', selected: sort_selected('date_asc') %>
+        <%= content_tag :option, 'сумме (сперва большие)', value: 'sum_desc', selected: sort_selected('sum_desc') %>
+        <%= content_tag :option, 'сумме (сперва малые)', value: 'sum_asc', selected: sort_selected('sum_asc') %>
       <% end %>
     </div>
     <%= hidden_field_tag :page, 1 %>
-    <%= f.submit 'Apply' %>
+    <%= f.submit 'Применить' %>
   <% end %>
 </div>

@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
     @product=User.find(params[:user_id]).products.new(product_params)
 
     if @product.save
-      flash[:success]='Product saved'
+      flash[:success]='Продукт добавлен'
       redirect_to user_product_path( params[:user_id], @product.id )
     else
       @errors=@product.errors.full_messages
@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
   def update
     @product=User.find(params[:user_id]).products.find(params[:id])
     if @product.update(product_params)
-      flash[:success]='Product updated'
+      flash[:success]='Продукт обновлен'
       redirect_to user_product_path
     else
       @errors=@product.errors.full_messages
@@ -49,7 +49,7 @@ class ProductsController < ApplicationController
   def destroy
     product=Product.find(params[:id])
     toggle_active(product)
-    flash[:success] = (product.active? ? 'Product restored' : 'Product deleted')
+    flash[:success] = (product.active? ? 'Продукт восстановлен' : 'Продукт удален')
     redirect_to user_products_path
   end
 

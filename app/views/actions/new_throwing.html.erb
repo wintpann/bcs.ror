@@ -1,10 +1,10 @@
-<h2 class="page-title">Throwing</h2>
+<h2 class="page-title">Списание товара</h2>
 <%= render 'shared/errors' %>
 <% if @warehouses && @warehouses.any? %>
   <%= form_for :throwing_event, url: user_create_throwing_path do |f| %>
     <%= render 'select_stuff', stuff: @warehouses, f: f %>
-    <%= f.submit 'Throw' %>
+    <%= f.submit 'Списать' %>
   <% end %>
 <% else %>
-  <h3>Nothing to throw</h3>
+  <h3>Нечего списывать</h3>
 <% end %>

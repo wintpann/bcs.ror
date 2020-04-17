@@ -1,13 +1,13 @@
-<%= content_tag :h2, "Product: #{@product.name}", class: 'page-title' %>
+<%= content_tag :h2, "Продукт: #{@product.name}", class: 'page-title' %>
 <div class="info">
-  <div><%= content_tag :p, "Purchase price: #{@product.price_in}" %></div>
-  <div><%= content_tag :p, "Selling price: #{@product.price_out}" %></div>
+  <div><%= content_tag :p, "Цена покупки: #{@product.price_in}" %></div>
+  <div><%= content_tag :p, "Цена продажи: #{@product.price_out}" %></div>
 </div>
 
 <% if @product.active? %>
   <ul class="actions">
-    <li><%= link_to 'All products', user_products_path %></li>
-    <li><%= link_to 'Edit product', edit_user_product_path %></li>
+    <li><%= link_to 'Все продукты', user_products_path %></li>
+    <li><%= link_to 'Редактировать продукт', edit_user_product_path %></li>
   </ul>
 <% end %>
 

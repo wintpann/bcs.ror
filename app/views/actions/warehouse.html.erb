@@ -1,6 +1,6 @@
-<h2 class="page-title">Warehouse</h2>
+<h2 class="page-title">Склад</h2>
 <% if @warehouses && @warehouses.any? %>
   <%= render 'shared/stocks', stocks: @warehouses %>
 <% else %>
-  <h3 class="page-title">There is no any products in warehouse</h3>
+  <h3 class="page-title">На складе нет продуктов</h3>
 <% end %>

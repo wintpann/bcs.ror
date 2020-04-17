@@ -1,16 +1,16 @@
-<h2 class="page-title">Log in</h2>
+<h2 class="page-title">Войти</h2>
 <%= form_for :session, url: login_path do |f| %>
   <div>
-    <%= f.label :email %>
+    <%= f.label :email, "Электронная почта" %>
     <%= f.text_field :email %>
   </div>
   <div>
-    <%= f.label :password %>
+    <%= f.label :password, "Пароль" %>
     <%= f.password_field :password %>
   </div>
   <div>
-    <%= f.label :remember_me %>
+    <%= f.label :remember_me, "Запомнить меня" %>
     <%= f.check_box :remember_me %>
   </div>
-  <%= f.submit 'Log in' %>
+  <%= f.submit 'Войти' %>
 <% end %>

@@ -2,32 +2,32 @@
 
 <% if @employee.active? %>
   <% if !@employee.working? %>
-    <%= link_to 'Start new work session for this employee', user_employee_new_work_session_path(params[:user_id], params[:id]), class: 'btn' %>
+    <%= link_to 'Начать новую рабочую сессию', user_employee_new_work_session_path(params[:user_id], params[:id]), class: 'btn' %>
   <% else %>
     <div>
       <h3 class="page-title">In stock:</h3>
       <%= render 'shared/stocks', stocks: @employee.employee_stocks %>
     </div>
     <div>
-      <div><%= link_to 'Add stuff for this employee', user_employee_new_work_session_path(params[:user_id], params[:id]), class: 'btn' %></div>
-      <div><%= link_to 'End work session / Take stuff from this employee', user_employee_end_work_session_path(params[:user_id], params[:id]), class: 'btn' %></div>
+      <div><%= link_to 'Добавить товар', user_employee_new_work_session_path(params[:user_id], params[:id]), class: 'btn' %></div>
+      <div><%= link_to 'Закончить рабочую сессию / забрать товар', user_employee_end_work_session_path(params[:user_id], params[:id]), class: 'btn' %></div>
     </div>
   <% end %>
 <% end %>
 
 <div class="info">
   <div>
-    <%= content_tag :p, "Fixed rate: #{@employee.fixed_rate}" %>
+    <%= content_tag :p, "Фиксированная ставка: #{@employee.fixed_rate}" %>
   </div>
   <div>
-    <%= content_tag :p, "Interest rate: #{@employee.interest_rate}" %>
+    <%= content_tag :p, "Процентная ставка: #{@employee.interest_rate}" %>
   </div>
 
 
   <% if @employee.active? %>
     <ul class="actions">
-      <li><%= link_to 'All employees', user_employees_path %></li>
-      <li><%= link_to 'Edit employee', edit_user_employee_path %></li>
+      <li><%= link_to 'Все работники', user_employees_path %></li>
+      <li><%= link_to 'Редактировать работника', edit_user_employee_path %></li>
     </ul>
   <% end %>
 

@@ -2,19 +2,19 @@ module ActionsHelper
 
   def event_types
     [
-      {name: "All", type: 'all'},
-      {name: 'Shopping', type: 'shopping'},
-      {name: 'Start work session', type: 'start_work_session'},
-      {name: 'Throwing', type: 'throwing'},
-      {name: 'Giving', type: 'giving'},
-      {name: 'End work session', type: 'end_work_session'},
-      {name: 'Selling', type: 'selling'},
-      {name: 'Taking', type: 'taking'},
-      {name: 'Salary', type: 'employee_salary'},
-      {name: 'Other expense', type: 'other_expense'},
-      {name: 'Transportation expense', type: 'fare'},
-      {name: 'Equipment expense', type: 'equipment'},
-      {name: 'Tax expense', type: 'tax'}
+      {name: "Все", type: 'all'},
+      {name: 'Закупка', type: 'shopping'},
+      {name: 'Начало рабочей сессии', type: 'start_work_session'},
+      {name: 'Списание', type: 'throwing'},
+      {name: 'Передача товара', type: 'giving'},
+      {name: 'Конец рабочей сессии', type: 'end_work_session'},
+      {name: 'Продажа товара', type: 'selling'},
+      {name: 'Получение товара', type: 'taking'},
+      {name: 'Зарплата', type: 'employee_salary'},
+      {name: 'Другой расход', type: 'other_expense'},
+      {name: 'Транспортный расход', type: 'fare'},
+      {name: 'Расход на оборудование', type: 'equipment'},
+      {name: 'Налог', type: 'tax'}
     ]
   end
 

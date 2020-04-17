@@ -39,7 +39,7 @@ module SessionsHelper
 
   def authenticate_user!
     if !logged_in?
-      flash[:danger]='You need to log in first'
+      flash[:danger]='Вы должны быть авторизованы'
       redirect_to login_path
     end
   end
@@ -50,7 +50,7 @@ module SessionsHelper
 
   def admin_user!
     if !current_user.admin?
-      flash[:danger]="You don't have access to this page"
+      flash[:danger]="У вас нет доступа к этой странице"
       redirect_to root_path
     end
   end
@@ -68,7 +68,7 @@ module SessionsHelper
     user=User.find(user_id)
 
     if !current_user?(user)
-      flash[:danger]="You don't have access to this page"
+      flash[:danger]="У вас нет доступа к этой странице"
       redirect_to root_path
     end
   end

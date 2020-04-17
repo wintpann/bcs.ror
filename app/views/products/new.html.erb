@@ -1,6 +1,6 @@
-<%= content_tag :h2, "Add a product" %>
+<%= content_tag :h2, "Добавить продукт", class: 'page-title' %>
 <%= render 'shared/errors' %>
 <%= form_for @product, url: user_products_path do |f| %>
   <%= render 'product', f: f %>
-  <%= f.submit 'Add product' %>
+  <%= f.submit 'Добавить' %>
 <% end %>

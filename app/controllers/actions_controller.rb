@@ -30,7 +30,7 @@ class ActionsController < ApplicationController
     search=params[:search]
 
     if @all_events.empty?
-      flash[:alert]="You don't have any events yet. Create first one!"
+      flash[:alert]="У вас еще нет событий"
       redirect_to user_path(params[:user_id])
       return
     end
@@ -73,7 +73,7 @@ class ActionsController < ApplicationController
 
   def create_shopping
     if empty_purchase?(shopping_params)
-      @errors=['Purchase must contain at least one product']
+      @errors=['Покупка должна содержать хотя бы один продукт']
       render 'new_shopping'
       return
     end
@@ -88,10 +88,10 @@ class ActionsController < ApplicationController
 
   def create_throwing
     if empty_product_params?(throwing_params)
-      @errors=['Throw must contain at least one product']
+      @errors=['Списание должно содержать хотя бы один продукт']
       render 'new_throwing'
     elsif more_than_there_is?(warehouses: @warehouses, product_params: throwing_params)
-      @errors=['You can not throw more than you have']
+      @errors=['Вы не можете списать больше чем есть в наличии']
       render 'new_throwing'
     else
       head_throwing_event=@user.all_events.create(event_type: 'throwing')
@@ -108,19 +108,19 @@ class ActionsController < ApplicationController
     @employee=Employee.find(params[:employee_id])
 
     if !@employee.active?
-      flash[:danger]='Employee is inactive!'
+      flash[:danger]='Работник удален!'
       redirect_to user_path(params[:user_id])
       return
     end
 
     if empty_product_params?(work_session_params)
-      @errors=['Stuff must contain at least one product']
+      @errors=['Должен быть хотя бы один продукт']
       render 'new_work_session'
       return
     end
 
     if more_than_there_is?(warehouses: @warehouses, product_params: work_session_params)
-      @errors=['You can not give more than you have']
+      @errors=['Вы не можете дать больше чем есть в наличии']
       render 'new_work_session'
       return
     end
@@ -145,25 +145,25 @@ class ActionsController < ApplicationController
     ending_params=ending_params(end_work_session_params(@stocks_products))
 
     if !@employee.working?
-      flash[:danger]="The employee isn't working!"
+      flash[:danger]="Этот работник не работает!"
       redirect_to user_path(params[:user_id])
       return
     end
 
     if empty_product_params?(ending_params) && !work_session_ends
-      @errors=['Stuff must contain at least one product']
+      @errors=['Должно содержать хотя бы один продукт']
       render 'end_work_session'
       return
     end
 
     if more_than_there_is?(warehouses: @stocks, product_params: ending_params)
-      @errors=['You can not take more than there is']
+      @errors=['Вы не можете взять больше чем есть']
       render 'end_work_session'
       return
     end
 
     if all_of?(warehouses: @stocks, product_params: ending_params) && !work_session_ends
-      @errors=['You can not take all stuff without ending work session']
+      @errors=['Закончите сессию если хотите взять весь товар']
       render 'end_work_session'
       return
     end

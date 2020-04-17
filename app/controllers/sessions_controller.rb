@@ -5,12 +5,11 @@ class SessionsController < ApplicationController
   def create
     @user=User.find_by(email: params[:session][:email])
     if @user && @user.authenticate(params[:session][:password])
-      flash[:success]="Logged in"
       log_in @user
       remember @user if params[:session][:remember_me]=='1'
       redirect_to root_path
     else
-      flash[:alert]="Invalid password/login"
+      flash.now[:alert]="Неверный логин/пароль"
       render 'new'
     end
   end

@@ -1,6 +1,6 @@
 <% if @inactive_products %>
-  <div>
-    <h2>Inactive products</h2>
+  <h2 class="page-title">Удаленные продукты</h2>
+  <div class="collection">
     <ul>
       <% @inactive_products.each do |product| %>
         <li><%= link_to product.name, user_product_path(params[:user_id], product.id) %></li>

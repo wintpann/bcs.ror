@@ -1,6 +1,6 @@
-<h2>Edit <em><%=@user.name%></em> profile</h2>
+<h2 class="page-title">Редактировать <em><%=@user.name%></em> профиль</h2>
 <%= render 'shared/errors' %>
 <%= form_for @user do |f| %>
   <%= render 'user', f: f %>
-  <%= f.submit 'Edit' %>
+  <%= f.submit 'Редактировать' %>
 <% end %>

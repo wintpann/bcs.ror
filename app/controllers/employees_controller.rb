@@ -9,7 +9,7 @@ class EmployeesController < ApplicationController
   def create
     @employee=User.find(params[:user_id]).employees.new(employee_params)
     if @employee.save
-      flash[:success]='Employee added'
+      flash[:success]='Работник добавлен'
       redirect_to user_employee_path(params[:user_id], @employee.id)
     else
       @errors=@employee.errors.full_messages
@@ -24,7 +24,7 @@ class EmployeesController < ApplicationController
   def update
     @employee=User.find(params[:user_id]).employees.find(params[:id])
     if @employee.update(employee_params)
-      flash[:success]='Employee updated'
+      flash[:success]='Работник обновлен'
       redirect_to user_employee_path
     else
       @errors=@employee.errors.full_messages
@@ -44,11 +44,11 @@ class EmployeesController < ApplicationController
   def destroy
     @employee=Employee.find(params[:id])
     if @employee.working?
-      flash[:danger]='You cannot delete WORKING employee. Finish its job first'
+      flash[:danger]='Вы не можете удалить ЗАНЯТОГО работника. Сначала завершите его сессию'
       redirect_to user_employee_path
     else
       toggle_active(@employee)
-      flash[:success] = (@employee.active? ? 'Employee restored' : 'Employee deleted')
+      flash[:success] = (@employee.active? ? 'Работник восстановлен' : 'Работник удален')
       redirect_to user_employees_path
     end
   end

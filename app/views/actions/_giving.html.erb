@@ -1,4 +1,4 @@
-<%= content_tag :h3, "Giving stuff to #{event.giving_events.first.employee.name}", class: 'page-title' %>
+<%= content_tag :h3, "Передача товара #{event.giving_events.first.employee.name}", class: 'page-title' %>
 <div class="date"><%=to_local(event.created_at)%></div>
 <%= render 'shared/stocks', stocks: event.giving_events %>
-<div class="sum"><%="Total: #{event.sum} rub"%></div>
+<div class="sum"><%="Всего: #{event.sum} руб"%></div>

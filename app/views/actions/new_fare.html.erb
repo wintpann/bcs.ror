@@ -1,5 +1,5 @@
-<h2 class="page-title">New transportation expense</h2>
+<h2 class="page-title">Новый транспортный расход</h2>
 <%= render 'shared/errors' %>
 <%= form_for :new_fare, url: user_create_fare_path do |f| %>
-  <%= render 'expense', f: f, options: {description: '(optional)'} %>
+  <%= render 'expense', f: f, options: {description: '(не обязательно)'} %>
 <% end %>

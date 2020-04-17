@@ -1,28 +1,28 @@
 <% if current_user.admin? && current_user==User.find(params[:id])%>
   <% controller.redirect_to users_path %>
 <% else %>
-  <%= content_tag :h2, "Welcome, #{@user.name}", class: 'page-title' %>
+  <%= content_tag :h2, "Добро пожаловать, #{@user.name}", class: 'page-title' %>
   <div>
     <div class="user-links">
       <ul>
-        <li><%= link_to 'Products', user_products_path(@user) %></li>
-        <li><%= link_to 'Employees', user_employees_path(@user) %></li>
-        <li><%= link_to 'Warehouse', user_warehouse_path(@user) %></li>
-        <li><%= link_to 'Go shopping', user_new_shopping_path(@user) %></li>
-        <li><%= link_to 'Throw products', user_new_throwing_path(@user) %></li>
-        <li><%= link_to 'New transportation expense', user_new_fare_path(@user) %></li>
-        <li><%= link_to 'New equipment purchase', user_new_equipment_path(@user) %></li>
-        <li><%= link_to 'New tax payment', user_new_tax_path(@user) %></li>
-        <li><%= link_to 'New other expense', user_new_other_expense_path(@user) %></li>
-        <li><%= link_to 'All events', user_events_path(@user) %></li>
+        <li><%= link_to 'Продукты', user_products_path(@user) %></li>
+        <li><%= link_to 'Работники', user_employees_path(@user) %></li>
+        <li><%= link_to 'Склад', user_warehouse_path(@user) %></li>
+        <li><%= link_to 'Закупка', user_new_shopping_path(@user) %></li>
+        <li><%= link_to 'Списание', user_new_throwing_path(@user) %></li>
+        <li><%= link_to 'Транспортный расход', user_new_fare_path(@user) %></li>
+        <li><%= link_to 'Расход на оборудование', user_new_equipment_path(@user) %></li>
+        <li><%= link_to 'Оплата налога', user_new_tax_path(@user) %></li>
+        <li><%= link_to 'Другой расход', user_new_other_expense_path(@user) %></li>
+        <li><%= link_to 'Все события', user_events_path(@user) %></li>
       </ul>
     </div>
     <div class="user-links danger-zone">
       <ul>
-        <li><%= link_to 'Deleted products', user_inactive_products_path(@user) %></li>
-        <li><%= link_to 'Deleted employees', user_inactive_employees_path(@user) %></li>
-        <li><%= link_to 'Edit profile', edit_user_path(@user) %></li>
-        <li><%= link_to 'Delete profile', user_path(@user), method: :delete, data: {confirm: 'Are you exactly sure? Action cannot be undone'} %></li>
+        <li><%= link_to 'Удаленные продукты', user_inactive_products_path(@user) %></li>
+        <li><%= link_to 'Удаленные работники', user_inactive_employees_path(@user) %></li>
+        <li><%= link_to 'Редактировать профиль', edit_user_path(@user) %></li>
+        <li><%= link_to 'Удалить профиль', user_path(@user), method: :delete, data: {confirm: 'Вы уверены? Действие не может быть отменено'} %></li>
       </ul>
     </div>
   </div>

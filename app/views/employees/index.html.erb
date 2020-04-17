@@ -1,10 +1,10 @@
-<h2 class="page-title">Employees</h2>
-<%= link_to 'Add employee', new_user_employee_path, class: 'btn' %>
+<h2 class="page-title">Работники</h2>
+<%= link_to 'Добавить работника', new_user_employee_path, class: 'btn' %>
 <div class="working">
-  <h3>Working employees</h3>
+  <h3>Сейчас работают</h3>
   <%= render 'shared/link_list', collection: @active_working_employees, common_url: user_employees_path %>
 </div>
 <div class="free">
-  <h3>Free employees</h3>
+  <h3>Свободны</h3>
   <%= render 'shared/link_list', collection: @active_free_employees, common_url: user_employees_path %>
 </div>

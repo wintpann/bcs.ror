@@ -47,11 +47,11 @@ module ApplicationHelper
   end
 
   def toggler_action(model)
-    model.active? ? "Delete #{model.class}" : "Restore #{model.class}"
+    model.active? ? "Удалить" : "Восстановить"
   end
 
   def confirm_message(model)
     item_type=model.class
-    model.active? ? "Are you sure? #{item_type} will placed in <Inactive #{plural(item_type)}>, so you can restore it later" : "You are going to restore #{item_type}"
+    model.active? ? "Вы уверены? Будет помещено в <Удаленные>, вы сможете восстановить его позже" : "Вы собираетесь восстановить его"
   end
 end

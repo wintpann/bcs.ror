@@ -1,4 +1,4 @@
-<h2 class="page-title">Shopping</h2>
+<h2 class="page-title">Закупка</h2>
 <div class="date"><%=to_local(event.created_at)%></div>
 <%= render 'shared/stocks', stocks: event.shopping_events %>
-<div class="sum-red"><%="Total: -#{event.sum} rub"%></div>
+<div class="sum-red"><%="Всего: -#{event.sum} руб"%></div>

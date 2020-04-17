@@ -1,19 +1,19 @@
 <header>
   <% if current_user && current_user.admin?%>
-  <h3 class="page-title">ADMIN MODE</h3>
+  <h3 class="page-title">РЕЖИМ АДМИНИСТРАТОРА</h3>
     <ul class="sign">
-      <li><%= link_to 'All users', users_path %></li>
-      <li><%= link_to 'Sign out', logout_path, method: :delete %></li>
+      <li><%= link_to 'Все пользователи', users_path %></li>
+      <li><%= link_to 'Выйти', logout_path, method: :delete %></li>
     </ul>
   <% elsif current_user %>
     <ul class="sign">
-      <li><%= link_to 'Management', user_path(current_user) %></li>
-      <li><%= link_to 'Sign out', logout_path, method: :delete %></li>
+      <li><%= link_to 'Управление', user_path(current_user) %></li>
+      <li><%= link_to 'Выйти', logout_path, method: :delete %></li>
     </ul>
   <% else %>
     <ul class="sign">
-      <li><%= link_to 'Sign in', login_path %></li>
-      <li><%= link_to 'Sign up', signup_path %></li>
+      <li><%= link_to 'Войти', login_path %></li>
+      <li><%= link_to 'Зарегистрироваться', signup_path %></li>
     </ul>
   <% end %>
 </header>
