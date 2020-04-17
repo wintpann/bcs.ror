@@ -55,6 +55,12 @@ module SessionsHelper
     end
   end
 
+  def active_user!
+    if !current_user.active?
+      redirect_to root_path
+    end
+  end
+
   def correct_user!
     return true if current_user.admin?
 

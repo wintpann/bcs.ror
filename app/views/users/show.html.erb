@@ -1,23 +1,25 @@
-<%= content_tag :h2, "Welcome, #{@user.name}" %>
-<div>
-  <div class="links">
-    <ul>
-      <li><%= link_to 'Products', user_products_path(@user) %></li>
-      <li><%= link_to 'Employees', user_employees_path(@user) %></li>
-      <li><%= link_to 'Warehouse', user_warehouse_path(@user) %></li>
-      <li><%= link_to 'Go shopping', user_new_shopping_path(@user) %></li>
-      <li><%= link_to 'Throw products', user_new_throwing_path(@user) %></li>
-      <li><%= link_to 'New transportation expense', user_new_fare_path(@user) %></li>
-      <li><%= link_to 'New equipment purchase', user_new_equipment_path(@user) %></li>
-      <li><%= link_to 'New tax payment', user_new_tax_path(@user) %></li>
-      <li><%= link_to 'New other expense', user_new_other_expense_path(@user) %></li>
-      <li><%= link_to 'All events', user_events_path(@user) %></li>
-    </ul>
+<% unless current_user.admin? && current_user==User.find(params[:id])%>
+  <%= content_tag :h2, "Welcome, #{@user.name}" %>
+  <div>
+    <div class="links">
+      <ul>
+        <li><%= link_to 'Products', user_products_path(@user) %></li>
+        <li><%= link_to 'Employees', user_employees_path(@user) %></li>
+        <li><%= link_to 'Warehouse', user_warehouse_path(@user) %></li>
+        <li><%= link_to 'Go shopping', user_new_shopping_path(@user) %></li>
+        <li><%= link_to 'Throw products', user_new_throwing_path(@user) %></li>
+        <li><%= link_to 'New transportation expense', user_new_fare_path(@user) %></li>
+        <li><%= link_to 'New equipment purchase', user_new_equipment_path(@user) %></li>
+        <li><%= link_to 'New tax payment', user_new_tax_path(@user) %></li>
+        <li><%= link_to 'New other expense', user_new_other_expense_path(@user) %></li>
+        <li><%= link_to 'All events', user_events_path(@user) %></li>
+      </ul>
+    </div>
+    <div class="danger-zone">
+      <div><%= link_to 'Deleted products', user_inactive_products_path(@user) %></div>
+      <div><%= link_to 'Deleted employees', user_inactive_employees_path(@user) %></div>
+      <div><%= link_to 'Edit profile', edit_user_path(@user) %></div>
+      <div><%= link_to 'Delete profile', user_path(@user), method: :delete, data: {confirm: 'Are you exactly sure? Action cannot be undone'} %></div>
+    </div>
   </div>
-  <div class="danger-zone">
-    <div><%= link_to 'Deleted products', user_inactive_products_path(@user) %></div>
-    <div><%= link_to 'Deleted employees', user_inactive_employees_path(@user) %></div>
-    <div><%= link_to 'Edit profile', edit_user_path(@user) %></div>
-    <div><%= link_to 'Delete profile', user_path(@user), method: :delete, data: {confirm: 'Are you exactly sure? Action cannot be undone'} %></div>
-  </div>
-</div>
+<% end %>

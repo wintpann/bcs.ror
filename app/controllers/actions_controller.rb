@@ -2,6 +2,7 @@ class ActionsController < ApplicationController
   include ActionsHelper
 
   before_action :authenticate_user!
+  before_action :active_user!
   before_action :correct_user!
 
   before_action do

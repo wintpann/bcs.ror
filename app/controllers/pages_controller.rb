@@ -1,5 +1,13 @@
 class PagesController < ApplicationController
   def home
-    redirect_to user_path(current_user.id) if logged_in?
+    if logged_in?
+      if current_user.active?
+        redirect_to user_path(current_user.id)
+      else
+        render 'inactive'
+      end
+    else
+      render 'sign'
+    end
   end
 end
