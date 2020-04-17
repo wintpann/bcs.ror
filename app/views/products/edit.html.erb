@@ -1,4 +1,4 @@
-<%= content_tag :h2, "Edit product: #{@product.name}" %>
+<%= content_tag :h2, "Edit product: #{@product.name}", class: 'page-title' %>
 <%= render 'shared/errors' %>
 <%= form_for @product, url: user_product_path do |f| %>
   <%= render 'product', f: f %>

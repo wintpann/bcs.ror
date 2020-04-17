@@ -1,21 +1,21 @@
-<%= content_tag :h3, "#{@employee.name}: #{state(@employee)}" %>
+<%= content_tag :h3, "#{@employee.name}: #{state(@employee)}", class: 'page-title' %>
 
 <% if @employee.active? %>
   <% if !@employee.working? %>
-    <%= link_to 'Start new work session for this employee', user_employee_new_work_session_path(params[:user_id], params[:id]) %>
+    <%= link_to 'Start new work session for this employee', user_employee_new_work_session_path(params[:user_id], params[:id]), class: 'btn' %>
   <% else %>
     <div>
-      <h3>In stock:</h3>
+      <h3 class="page-title">In stock:</h3>
       <%= render 'shared/stocks', stocks: @employee.employee_stocks %>
     </div>
     <div>
-      <div><%= link_to 'Add stuff for this employee', user_employee_new_work_session_path(params[:user_id], params[:id]) %></div>
-      <div><%= link_to 'End work session / Take stuff from this employee', user_employee_end_work_session_path(params[:user_id], params[:id]) %></div>
+      <div><%= link_to 'Add stuff for this employee', user_employee_new_work_session_path(params[:user_id], params[:id]), class: 'btn' %></div>
+      <div><%= link_to 'End work session / Take stuff from this employee', user_employee_end_work_session_path(params[:user_id], params[:id]), class: 'btn' %></div>
     </div>
   <% end %>
 <% end %>
 
-<div>
+<div class="info">
   <div>
     <%= content_tag :p, "Fixed rate: #{@employee.fixed_rate}" %>
   </div>
@@ -25,16 +25,14 @@
 
 
   <% if @employee.active? %>
-  <div>
-    <%= link_to 'All employees', user_employees_path %>
-  </div>
-  <div>
-    <%= link_to 'Edit employee', edit_user_employee_path %>
-  </div>
+    <ul class="actions">
+      <li><%= link_to 'All employees', user_employees_path %></li>
+      <li><%= link_to 'Edit employee', edit_user_employee_path %></li>
+    </ul>
   <% end %>
 
 
-  <div>
+  <div class="danger-zone">
     <%= link_to toggler_action(@employee), user_employee_path, method: :delete, data: {confirm: confirm_message(@employee)} %>
   </div>
 </div>

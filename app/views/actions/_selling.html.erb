@@ -1,4 +1,4 @@
-<%= content_tag :h3, "Selling stuff: #{event.selling_events.first.employee.name}" %>
-<div><%=to_local(event.created_at)%></div>
+<%= content_tag :h3, "Selling stuff: #{event.selling_events.first.employee.name}", class: 'page-title' %>
+<div class="date"><%=to_local(event.created_at)%></div>
 <%= render 'shared/stocks', stocks: event.selling_events %>
-<div><%="Total: +#{event.sum} rub"%></div>
+<div class="sum-green"><%="Total: +#{event.sum} rub"%></div>

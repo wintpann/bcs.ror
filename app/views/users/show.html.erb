@@ -1,9 +1,9 @@
 <% if current_user.admin? && current_user==User.find(params[:id])%>
   <% controller.redirect_to users_path %>
 <% else %>
-  <%= content_tag :h2, "Welcome, #{@user.name}" %>
+  <%= content_tag :h2, "Welcome, #{@user.name}", class: 'page-title' %>
   <div>
-    <div class="links">
+    <div class="user-links">
       <ul>
         <li><%= link_to 'Products', user_products_path(@user) %></li>
         <li><%= link_to 'Employees', user_employees_path(@user) %></li>
@@ -17,11 +17,13 @@
         <li><%= link_to 'All events', user_events_path(@user) %></li>
       </ul>
     </div>
-    <div class="danger-zone">
-      <div><%= link_to 'Deleted products', user_inactive_products_path(@user) %></div>
-      <div><%= link_to 'Deleted employees', user_inactive_employees_path(@user) %></div>
-      <div><%= link_to 'Edit profile', edit_user_path(@user) %></div>
-      <div><%= link_to 'Delete profile', user_path(@user), method: :delete, data: {confirm: 'Are you exactly sure? Action cannot be undone'} %></div>
+    <div class="user-links danger-zone">
+      <ul>
+        <li><%= link_to 'Deleted products', user_inactive_products_path(@user) %></li>
+        <li><%= link_to 'Deleted employees', user_inactive_employees_path(@user) %></li>
+        <li><%= link_to 'Edit profile', edit_user_path(@user) %></li>
+        <li><%= link_to 'Delete profile', user_path(@user), method: :delete, data: {confirm: 'Are you exactly sure? Action cannot be undone'} %></li>
+      </ul>
     </div>
   </div>
 <% end %>

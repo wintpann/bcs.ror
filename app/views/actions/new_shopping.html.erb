@@ -1,4 +1,4 @@
-<h2>New shopping</h2>
+<h2 class="page-title">New shopping</h2>
 <%= render 'shared/errors' %>
 <% if @active_products && @active_products.any? %>
   <%= form_for :shopping_event, url: user_create_shopping_path do |f| %>

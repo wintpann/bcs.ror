@@ -1,4 +1,4 @@
-<h2>New tax payment</h2>
+<h2 class="page-title">New tax payment</h2>
 <%= render 'shared/errors' %>
 <%= form_for :new_tax, url: user_create_tax_path do |f| %>
   <%= render 'expense', f: f, options: {description: '(optional)'} %>

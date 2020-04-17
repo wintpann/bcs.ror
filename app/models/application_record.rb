@@ -2,7 +2,7 @@ class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
   @@bad_page=false
   @@current_page=0
-  @@links_count=9
+  @@links_count=7
   @@items_for_page=20
 
   def self.items_for_page

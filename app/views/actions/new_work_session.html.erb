@@ -1,12 +1,12 @@
 <% if !@employee.active? %>
-  <h3>You can not start new work session for deleted employee</h3>
+  <h3 class="page-title">You can not start new work session for deleted employee</h3>
 <% elsif !@warehouses.any?%>
-  <h3>There are nothing in your warehouse</h3>
+  <h3 class="page-title">There are nothing in your warehouse</h3>
 <% else %>
   <% if @employee.working? %>
-    <%= content_tag :h3, "Add stuff to #{@employee.name}" %>
+    <%= content_tag :h3, "Add stuff to #{@employee.name}", class: 'btn' %>
   <% else %>
-    <%= content_tag :h3, "New work session for #{@employee.name}" %>
+    <%= content_tag :h3, "New work session for #{@employee.name}", class: 'page-title' %>
   <% end %>
 
 

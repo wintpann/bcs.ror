@@ -1,35 +1,41 @@
 <% if event.event_type=='shopping' %>
 
   <div class="event shopping_event">
-      <%= link_to "#{to_local_time(event.created_at)}", user_event_path(user_id, event.id) %>
-      <%= content_tag :span, "-#{event.sum} rub", class: 'sum' %>
+    <div>
+      <%= link_to "#{to_local_time(event.created_at)}", user_event_path(user_id, event.id), class: 'time' %>
+      <%= content_tag :span, "-#{event.sum} rub", class: 'sum-red' %>
       <%= content_tag :span, 'Shopping', class: 'type' %>
+    </div>
   </div>
 
 <% elsif event.event_type=='throwing' %>
 
   <div class="event throwing_event">
-      <%= link_to "#{to_local_time(event.created_at)}", user_event_path(user_id, event.id) %>
+    <div>
+      <%= link_to "#{to_local_time(event.created_at)}", user_event_path(user_id, event.id), class: 'time' %>
       <%= content_tag :span, "-#{event.sum} rub", class: 'sum' %>
       <%= content_tag :span, 'Throwing', class: 'type' %>
+    </div>
   </div>
 
 <% elsif event.event_type=='giving' %>
 
   <div class="event giving_event">
-      <%= link_to "#{to_local_time(event.created_at)}", user_event_path(user_id, event.id) %>
+    <div>
+      <%= link_to "#{to_local_time(event.created_at)}", user_event_path(user_id, event.id), class: 'time' %>
       <%= content_tag :span, "#{event.sum} rub", class: 'sum' %>
       <%= content_tag :span, "Giving to:", class: 'type' %>
-      <%= link_to event.giving_events.first.employee.name, user_employee_path(params[:user_id], event.giving_events.first.employee.id) %>
+      <%= link_to event.giving_events.first.employee.name, user_employee_path(params[:user_id], event.giving_events.first.employee.id), class: 'employee' %>
+    </div>
   </div>
 
 <% elsif event.event_type=='start_work_session' %>
 
   <div class="event start_work_session_event">
     <div>
-      <%= link_to "#{to_local_time(event.created_at)}", '' %>
+      <%= link_to "#{to_local_time(event.created_at)}", '#', class: 'time' %>
       <%= content_tag :span, "Start work session for:", class: 'type' %>
-      <%= link_to event.start_work_session_event.employee.name, user_employee_path(params[:user_id], event.start_work_session_event.employee.id) %>
+      <%= link_to event.start_work_session_event.employee.name, user_employee_path(params[:user_id], event.start_work_session_event.employee.id), class: 'employee' %>
     </div>
   </div>
 
@@ -37,10 +43,10 @@
 
   <div class="event taking_event">
       <div>
-        <%= link_to "#{to_local_time(event.created_at)}", user_event_path(user_id, event.id) %>
+        <%= link_to "#{to_local_time(event.created_at)}", user_event_path(user_id, event.id), class: 'time' %>
         <%= content_tag :span, "#{event.sum} rub", class: 'sum' %>
         <%= content_tag :span, "Taking stuff from:", class: 'type' %>
-        <%= link_to event.taking_events.first.employee.name, user_employee_path(params[:user_id], event.taking_events.first.employee.id) %>
+        <%= link_to event.taking_events.first.employee.name, user_employee_path(params[:user_id], event.taking_events.first.employee.id), class: 'employee' %>
       </div>
   </div>
 
@@ -48,10 +54,10 @@
 
   <div class="event selling_event">
       <div>
-        <%= link_to "#{to_local_time(event.created_at)}", user_event_path(user_id, event.id) %>
-        <%= content_tag :span, "+#{event.sum} rub", class: 'sum' %>
+        <%= link_to "#{to_local_time(event.created_at)}", user_event_path(user_id, event.id), class: 'time' %>
+        <%= content_tag :span, "+#{event.sum} rub", class: 'sum-green' %>
         <%= content_tag :span, "Selling stuff: ", class: 'type' %>
-        <%= link_to event.selling_events.first.employee.name, user_employee_path(params[:user_id], event.selling_events.first.employee.id) %>
+        <%= link_to event.selling_events.first.employee.name, user_employee_path(params[:user_id], event.selling_events.first.employee.id), class: 'employee' %>
       </div>
   </div>
 
@@ -59,10 +65,10 @@
 
   <div class="event employee_salary_event">
       <div>
-        <%= link_to "#{to_local_time(event.created_at)}", '' %>
-        <%= content_tag :span, "-#{event.sum} rub", class: 'sum' %>
+        <%= link_to "#{to_local_time(event.created_at)}", '#', class: 'time' %>
+        <%= content_tag :span, "-#{event.sum} rub", class: 'sum-red' %>
         <%= content_tag :span, "Salary to employee: ", class: 'type' %>
-        <%= link_to event.employee_salary_event.employee.name, user_employee_path(params[:user_id], event.employee_salary_event.employee.id) %>
+        <%= link_to event.employee_salary_event.employee.name, user_employee_path(params[:user_id], event.employee_salary_event.employee.id), class: 'employee' %>
       </div>
   </div>
 
@@ -70,9 +76,9 @@
 
   <div class="event end_work_session_event">
     <div>
-      <%= link_to "#{to_local_time(event.created_at)}", '' %>
+      <%= link_to "#{to_local_time(event.created_at)}", '#', class: 'time' %>
       <%= content_tag :span, "End work session for:", class: 'type' %>
-      <%= link_to event.end_work_session_event.employee.name, user_employee_path(params[:user_id], event.end_work_session_event.employee.id) %>
+      <%= link_to event.end_work_session_event.employee.name, user_employee_path(params[:user_id], event.end_work_session_event.employee.id), class: 'employee' %>
     </div>
   </div>
 
@@ -80,8 +86,8 @@
 
   <div class="event fare_event">
     <div>
-      <%= link_to "#{to_local_time(event.created_at)}", '' %>
-      <%= content_tag :span, "- #{event.fare_event.sum} rub", class: 'sum' %>
+      <%= link_to "#{to_local_time(event.created_at)}", '#', class: 'time' %>
+      <%= content_tag :span, "- #{event.fare_event.sum} rub", class: 'sum-red' %>
       <%= content_tag :span, "Transportation expense:", class: 'type' %>
       <%= content_tag :span, "«#{event.fare_event.description}»", class: 'description' %>
     </div>
@@ -91,8 +97,8 @@
 
   <div class="event tax_event">
     <div>
-      <%= link_to "#{to_local_time(event.created_at)}", '' %>
-      <%= content_tag :span, "- #{event.tax_event.sum} rub", class: 'sum' %>
+      <%= link_to "#{to_local_time(event.created_at)}", '#', class: 'time' %>
+      <%= content_tag :span, "- #{event.tax_event.sum} rub", class: 'sum-red' %>
       <%= content_tag :span, "Tax payment:", class: 'type' %>
       <%= content_tag :span, "«#{event.tax_event.description}»", class: 'description' %>
     </div>
@@ -102,8 +108,8 @@
 
   <div class="event equipment_event">
     <div>
-      <%= link_to "#{to_local_time(event.created_at)}", '' %>
-      <%= content_tag :span, "- #{event.equipment_event.sum} rub", class: 'sum' %>
+      <%= link_to "#{to_local_time(event.created_at)}", '#', class: 'time' %>
+      <%= content_tag :span, "- #{event.equipment_event.sum} rub", class: 'sum-red' %>
       <%= content_tag :span, "Equipment purchase:", class: 'type' %>
       <%= content_tag :span, "«#{event.equipment_event.description}»", class: 'description' %>
     </div>
@@ -113,8 +119,8 @@
 
   <div class="event other_expense_event">
     <div>
-      <%= link_to "#{to_local_time(event.created_at)}", '' %>
-      <%= content_tag :span, "- #{event.other_expense_event.sum} rub", class: 'sum' %>
+      <%= link_to "#{to_local_time(event.created_at)}", '#', class: 'time' %>
+      <%= content_tag :span, "- #{event.other_expense_event.sum} rub", class: 'sum-red' %>
       <%= content_tag :span, "Other expense:", class: 'type' %>
       <%= content_tag :span, "«#{event.other_expense_event.description}»", class: 'description' %>
     </div>

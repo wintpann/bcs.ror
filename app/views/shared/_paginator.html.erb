@@ -1,4 +1,8 @@
 <% links=get_links(@all_events) %>
-<% links[:left].upto(links[:right]) do |link| %>
-  <%= link_to link, user_events_path(params[:user_id], page: link, search:{type: params[:search][:type]||'all', employee: params[:search][:employee]||'all', date_from: params[:search][:date_from]||AllEvent.first.created_at.strftime('%Y-%m-%d'), date_to: params[:search][:date_to]||AllEvent.last.created_at.strftime('%Y-%m-%d'), sort: params[:search][:sort]||'date_desc'}) %>
-<% end %>
+<ul class="paginator">
+  <% links[:left].upto(links[:right]) do |link| %>
+    <li>
+      <%= link_to link, user_events_path(params[:user_id], page: link, search:{type: params[:search][:type]||'all', employee: params[:search][:employee]||'all', date_from: params[:search][:date_from]||AllEvent.first.created_at.strftime('%Y-%m-%d'), date_to: params[:search][:date_to]||AllEvent.last.created_at.strftime('%Y-%m-%d'), sort: params[:search][:sort]||'date_desc'}) %>
+    </li>
+  <% end %>
+</ul>

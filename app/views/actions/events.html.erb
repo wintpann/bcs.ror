@@ -2,7 +2,7 @@
 <% if @events && @events.any? %>
   <%= render 'shared/paginator' %>
   <% @events.each do |date, events| %>
-  <div>
+  <div class="date-events">
     <%= content_tag :h4, date %>
     <ul>
       <% events.each do |event| %>

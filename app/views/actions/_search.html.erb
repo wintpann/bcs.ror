@@ -1,7 +1,7 @@
-<div>
+<div class="filter">
   <%= form_for :search, url: user_events_path, method: :get do |f|%>
   <fieldset>
-    <legend>Filter</legend>
+    <legend class="page-title">Filter</legend>
     <div>
       <%= f.label :type, "By type" %>
       <%= f.select(:type) do %>

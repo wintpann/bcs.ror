@@ -1,17 +1,17 @@
 <header>
   <% if current_user && current_user.admin?%>
   <h3>ADMIN MODE</h3>
-    <ul>
+    <ul class="sign">
       <li><%= link_to 'All users', users_path %></li>
       <li><%= link_to 'Sign out', logout_path, method: :delete %></li>
     </ul>
   <% elsif current_user %>
-    <ul>
+    <ul class="sign">
       <li><%= link_to 'Management', user_path(current_user) %></li>
       <li><%= link_to 'Sign out', logout_path, method: :delete %></li>
     </ul>
   <% else %>
-    <ul>
+    <ul class="sign">
       <li><%= link_to 'Sign in', login_path %></li>
       <li><%= link_to 'Sign up', signup_path %></li>
     </ul>
