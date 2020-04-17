@@ -4,7 +4,7 @@
     <div>
       <%= link_to "#{to_local_time(event.created_at)}", user_event_path(user_id, event.id), class: 'time' %>
       <%= content_tag :span, "-#{event.sum} руб", class: 'sum-red' %>
-      <%= content_tag :span, 'Закупка', class: 'type' %>
+      <%= content_tag :span, 'Закупка товара', class: 'type' %>
     </div>
   </div>
 
@@ -14,7 +14,7 @@
     <div>
       <%= link_to "#{to_local_time(event.created_at)}", user_event_path(user_id, event.id), class: 'time' %>
       <%= content_tag :span, "-#{event.sum} руб", class: 'sum' %>
-      <%= content_tag :span, 'Списание', class: 'type' %>
+      <%= content_tag :span, 'Списание товара', class: 'type' %>
     </div>
   </div>
 

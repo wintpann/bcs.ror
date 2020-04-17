@@ -1,19 +1,63 @@
 ru:
   activerecord:
     models:
+      all_event: Событие
+      employee_salary_event: Зарплата
+      employee_stocks: Сток
+      employee: Работник
+      end_work_session_event: Конец рабочей сессии
+      equipment_event: Расход на оборудование
+      fare_event: Транспортный расход
+      giving_event: Передача товара
+      other_expense_event: Другой расход
+      product: Продукт
+      selling_event: Продажа
+      shopping_event: Закупка
+      start_work_session_event: Начало рабочей сессии
+      taking_event: Получение товара
+      tax_event: Налог
+      throwing_event: Списание
       user: Пользователь
-      employee: Пользователь
-      product: Пользователь
+      warehouse: Склад
     attributes:
-      user:
-        name: Имя
-        email: Почта
-        password: Пароль
       employee:
         name: Имя
         fixed_rate: Фиксированная ставка
         interest_rate: Процентная ставка
+        working: Занятость
+        active: Активность
+      equipment_event:
+        description: Описание
+        sum: Сумма
+      fare_event:
+        description: Описание
+        sum: Сумма
+      giving_event:
+        amount: Количество
+      other_expense_event:
+        description: Описание
+        sum: Сумма
       product:
         name: Наименование
         price_in: Цена покупки
         price_out: Цена продажи
+        active: Активность
+      selling_event:
+        amount: Количество
+      shopping_event:
+        amount: Количество
+      taking_event:
+        amount: Количество
+      tax_event:
+        description: Описание
+        sum: Сумма
+      throwing_event:
+        amount: Количество
+      user:
+        email: Почта
+        name: Имя
+        password: Пароль
+        active: Активность
+        admin: Права администратора
+      warehouse:
+        amount: Количество

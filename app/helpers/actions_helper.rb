@@ -5,7 +5,7 @@ module ActionsHelper
       {name: "Все", type: 'all'},
       {name: 'Закупка', type: 'shopping'},
       {name: 'Начало рабочей сессии', type: 'start_work_session'},
-      {name: 'Списание', type: 'throwing'},
+      {name: 'Списание товара', type: 'throwing'},
       {name: 'Передача товара', type: 'giving'},
       {name: 'Конец рабочей сессии', type: 'end_work_session'},
       {name: 'Продажа товара', type: 'selling'},

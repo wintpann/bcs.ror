@@ -3,8 +3,8 @@
 <%= form_for :end_work_session, url: user_employee_delete_work_session_path do |f| %>
   <%= render 'select_stuff', stuff: @stocks, f: f %>
   <div>
-    <%= f.label :end_work_session %>
+    <%= f.label :end_work_session, "Закончить сессию" %>
     <%= f.check_box :end_work_session %>
   </div>
-  <%= f.submit 'Take stuff' %>
+  <%= f.submit 'Забрать товар' %>
 <% end %>

@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 2020_04_17_083436) do
 
   create_table "equipment_events", force: :cascade do |t|
     t.bigint "all_event_id", null: false
-    t.string "description", default: "No description"
+    t.string "description", default: "Без описания"
     t.integer "sum"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 2020_04_17_083436) do
 
   create_table "fare_events", force: :cascade do |t|
     t.bigint "all_event_id", null: false
-    t.string "description", default: "No description"
+    t.string "description", default: "Без описания"
     t.integer "sum"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 2020_04_17_083436) do
 
   create_table "other_expense_events", force: :cascade do |t|
     t.bigint "all_event_id", null: false
-    t.string "description", default: "No description"
+    t.string "description", default: "Без описания"
     t.integer "sum"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -164,7 +164,7 @@ ActiveRecord::Schema.define(version: 2020_04_17_083436) do
 
   create_table "tax_events", force: :cascade do |t|
     t.bigint "all_event_id", null: false
-    t.string "description", default: "No description"
+    t.string "description", default: "Без описания"
     t.integer "sum"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
