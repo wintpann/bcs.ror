@@ -4,6 +4,7 @@ class ActionsController < ApplicationController
   before_action :authenticate_user!
   before_action :active_user!
   before_action :correct_user!
+  before_action :admin_user!, only: :toggle_user
 
   before_action do
     @user=User.find(params[:user_id])
@@ -256,6 +257,11 @@ class ActionsController < ApplicationController
       @errors=temp_event.errors.full_messages
       render 'new_other_expense'
     end
+  end
+
+  def toggle_user
+    User.find(params[:user_id]).toggle!(:active)
+    redirect_to users_path
   end
 
   def expense_params(type)

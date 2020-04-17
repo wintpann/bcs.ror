@@ -1,4 +1,6 @@
-<% unless current_user.admin? && current_user==User.find(params[:id])%>
+<% if current_user.admin? && current_user==User.find(params[:id])%>
+  <% controller.redirect_to users_path %>
+<% else %>
   <%= content_tag :h2, "Welcome, #{@user.name}" %>
   <div>
     <div class="links">
