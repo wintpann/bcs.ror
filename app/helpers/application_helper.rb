@@ -4,6 +4,12 @@ module ApplicationHelper
     pluralize(2, word.to_s)[2..-1]
   end
 
+  def sum(warehouses)
+    sum=0
+    warehouses.each { |item| sum+=item.amount*item.product.price_in }
+    return sum
+  end
+
   def get_links(model)
     links={}
     links[:left]=model.current_page-model.links_half

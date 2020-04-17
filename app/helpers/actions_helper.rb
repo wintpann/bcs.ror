@@ -113,6 +113,7 @@ module ActionsHelper
         options[:event].shopping_events.create_event(product: product, amount: value.to_i)
       end
     end
+    options[:event].user.update_attribute(:earned, options[:event].user.earned-options[:event].reload.sum)
   end
 
   def create_new_throwing(options={})
@@ -122,6 +123,7 @@ module ActionsHelper
         options[:event].throwing_events.create_event(product: product, amount: value.to_i)
       end
     end
+    options[:event].user.update_attribute(:throwed, options[:event].user.throwed-options[:event].reload.sum)
   end
 
   def create_new_giving(options={})
@@ -160,6 +162,7 @@ module ActionsHelper
     end
     options[:employee].employee_stocks.destroy_all
     options[:event].update_attribute(:employee_id, options[:employee].id)
+    options[:event].user.update_attribute(:earned, options[:event].user.earned+options[:event].reload.sum)
   end
 
   def create_new_employee_salary(options={})
@@ -167,6 +170,7 @@ module ActionsHelper
     head_salary_event=options[:salary_event].create_employee_salary_event(employee: options[:employee], sum: salary )
     options[:salary_event].update_attribute(:sum, head_salary_event.sum)
     options[:salary_event].update_attribute(:employee_id, options[:employee].id)
+    options[:salary_event].user.update_attribute(:earned, options[:salary_event].user.earned-options[:salary_event].reload.sum)
   end
 
   def create_new_end_work_session(options={})

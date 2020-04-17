@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     post 'create_equipment' => 'actions#create_equipment', as: :create_equipment
     get 'new_other_expense' => 'actions#new_other_expense', as: :new_other_expense
     post 'create_other_expense' => 'actions#create_other_expense', as: :create_other_expense
+    get 'stat' => 'actions#stat', as: :stat
   end
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'

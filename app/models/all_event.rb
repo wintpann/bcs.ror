@@ -20,6 +20,7 @@ class AllEvent < ApplicationRecord
       fare_event=self.create_fare_event(sum: options[:sum], description: options[:description])
     end
     self.update_attribute(:sum, fare_event.sum)
+    self.user.update_attribute(:earned, self.user.earned-self.reload.sum)
   end
 
   def create_tax(options={})
@@ -29,6 +30,7 @@ class AllEvent < ApplicationRecord
       tax_event=self.create_tax_event(sum: options[:sum], description: options[:description])
     end
     self.update_attribute(:sum, tax_event.sum)
+    self.user.update_attribute(:earned, self.user.earned-self.reload.sum)
   end
 
   def create_equipment(options={})
@@ -38,11 +40,13 @@ class AllEvent < ApplicationRecord
       equipment_event=self.create_equipment_event(sum: options[:sum], description: options[:description])
     end
     self.update_attribute(:sum, equipment_event.sum)
+    self.user.update_attribute(:earned, self.user.earned-self.reload.sum)
   end
 
   def create_other_expense(options={})
     other_expense_event=self.create_other_expense_event(sum: options[:sum], description: options[:description])
     self.update_attribute(:sum, other_expense_event.sum)
+    self.user.update_attribute(:earned, self.user.earned-self.reload.sum)
   end
 
 end
