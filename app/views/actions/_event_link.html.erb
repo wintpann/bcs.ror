@@ -33,7 +33,7 @@
 
   <div class="event start_work_session_event">
     <div>
-      <%= link_to "⎆ #{to_local_time(event.created_at)}", '#', class: 'time' %>
+      <%= content_tag :div, "#{to_local_time(event.created_at)}", class: 'time' %>
       <%= content_tag :span, "Начало рабочей сессии:", class: 'type' %>
       <%= link_to event.start_work_session_event.employee.name, user_employee_path(params[:user_id], event.start_work_session_event.employee.id), class: 'employee' %>
     </div>
@@ -65,7 +65,7 @@
 
   <div class="event employee_salary_event">
       <div>
-        <%= link_to "⎆ #{to_local_time(event.created_at)}", '#', class: 'time' %>
+        <%= content_tag :div, "#{to_local_time(event.created_at)}", class: 'time' %>
         <%= content_tag :span, "-#{event.sum} руб", class: 'sum-red' %>
         <%= content_tag :span, "Зарплата для: ", class: 'type' %>
         <%= link_to event.employee_salary_event.employee.name, user_employee_path(params[:user_id], event.employee_salary_event.employee.id), class: 'employee' %>
@@ -76,7 +76,7 @@
 
   <div class="event end_work_session_event">
     <div>
-      <%= link_to "⎆ #{to_local_time(event.created_at)}", '#', class: 'time' %>
+      <%= content_tag :div, "#{to_local_time(event.created_at)}", class: 'time' %>
       <%= content_tag :span, "Конец рабочей сессии:", class: 'type' %>
       <%= link_to event.end_work_session_event.employee.name, user_employee_path(params[:user_id], event.end_work_session_event.employee.id), class: 'employee' %>
     </div>
@@ -86,7 +86,7 @@
 
   <div class="event fare_event">
     <div>
-      <%= link_to "⎆ #{to_local_time(event.created_at)}", '#', class: 'time' %>
+      <%= content_tag :div, "#{to_local_time(event.created_at)}", class: 'time' %>
       <%= content_tag :span, "- #{event.fare_event.sum} руб", class: 'sum-red' %>
       <%= content_tag :span, "Транспортный расход:", class: 'type' %>
       <%= content_tag :span, "«#{event.fare_event.description}»", class: 'description' %>
@@ -97,7 +97,7 @@
 
   <div class="event tax_event">
     <div>
-      <%= link_to "⎆ #{to_local_time(event.created_at)}", '#', class: 'time' %>
+      <%= content_tag :div, "#{to_local_time(event.created_at)}", class: 'time' %>
       <%= content_tag :span, "- #{event.tax_event.sum} руб", class: 'sum-red' %>
       <%= content_tag :span, "Оплата налогов:", class: 'type' %>
       <%= content_tag :span, "«#{event.tax_event.description}»", class: 'description' %>
@@ -108,7 +108,7 @@
 
   <div class="event equipment_event">
     <div>
-      <%= link_to "⎆ #{to_local_time(event.created_at)}", '#', class: 'time' %>
+      <%= content_tag :div, "#{to_local_time(event.created_at)}", class: 'time' %>
       <%= content_tag :span, "- #{event.equipment_event.sum} руб", class: 'sum-red' %>
       <%= content_tag :span, "Расход на оборудование:", class: 'type' %>
       <%= content_tag :span, "«#{event.equipment_event.description}»", class: 'description' %>
@@ -119,7 +119,7 @@
 
   <div class="event other_expense_event">
     <div>
-      <%= link_to "⎆ #{to_local_time(event.created_at)}", '#', class: 'time' %>
+      <%= content_tag :div, "#{to_local_time(event.created_at)}", class: 'time' %>
       <%= content_tag :span, "- #{event.other_expense_event.sum} руб", class: 'sum-red' %>
       <%= content_tag :span, "Другой расход:", class: 'type' %>
       <%= content_tag :span, "«#{event.other_expense_event.description}»", class: 'description' %>
