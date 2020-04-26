@@ -2,6 +2,7 @@ admin = User.create!( email: 'vvintpann@gmail.com',
               name: 'admin',
               password: 'asdfasdf',
               password_confirmation: 'asdfasdf',
+              active: true,
               admin: true )
 taras = User.create!( email: 'taras@gmail.com',
               name: 'taras',

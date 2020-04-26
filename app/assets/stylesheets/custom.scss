@@ -362,11 +362,11 @@ textarea {
 
 
 /**/
-@import url('https://fonts.googleapis.com/css2?family=Jura:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 $text:rgb(240, 240, 250);
 html{
   font-size: 18px;
-  font-family: 'Jura', sans-serif;
+  font-family: 'Roboto', sans-serif;
   text-align: center;
   background-color: rgb(30, 30, 35);
   color: $text;
@@ -397,7 +397,11 @@ input{
   &:focus{
     box-shadow: 0 0 10px white;
   }
-  &[type="submit"]{padding: 5px 10px;margin-bottom: 10px;}
+  &[type="submit"]{
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    background-color: #eee;
+    color: #222;}
 }
 form>div{
   &>*{
@@ -500,10 +504,9 @@ table, th, td {
 th {
   background-color: rgb(55, 40, 35);
 }
-.filter *{
+.filter>form>fieldset>*{
   display: block;
-  margin: 0 auto;
-  padding: 10px;
+  margin: 10px auto;
 }
 .filter>form>*:last-child{margin: 10px auto;}
 .paginator{

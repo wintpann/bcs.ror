@@ -14,6 +14,9 @@ class ActionsController < ApplicationController
     @warehouses_products=warehouses_products(@warehouses)
   end
 
+  def stat
+  end
+
   def get_employee_with_stocks
     @employee=Employee.find(params[:employee_id])
     @stocks=@employee.employee_stocks

@@ -6,7 +6,7 @@
     <div class="user-links">
       <ul>
         <li><%= link_to 'Продукты', user_products_path(@user) %></li>
-        <li><%= link_to 'Работники', user_employees_path(@user) %></li>
+        <li><%= link_to "Работники #{any_working_sign(@user)}", user_employees_path(@user) %></li>
         <li><%= link_to 'Склад', user_warehouse_path(@user) %></li>
         <li><%= link_to 'Закупка', user_new_shopping_path(@user) %></li>
         <li><%= link_to 'Списание', user_new_throwing_path(@user) %></li>

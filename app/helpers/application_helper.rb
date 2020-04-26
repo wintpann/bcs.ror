@@ -4,10 +4,69 @@ module ApplicationHelper
     pluralize(2, word.to_s)[2..-1]
   end
 
+  def timezones
+    [
+      {zone: 'UTC+14', value: 14},
+      {zone: 'UTC+13', value: 13},
+      {zone: 'UTC+12:45', value: 12.75},
+      {zone: 'UTC+12', value: 12},
+      {zone: 'UTC+11', value: 11},
+      {zone: 'UTC+10:30', value: 10.5},
+      {zone: 'UTC+10', value: 10},
+      {zone: 'UTC+9:30', value: 9.5},
+      {zone: 'UTC+9', value: 9},
+      {zone: 'UTC+8:45', value: 8.75},
+      {zone: 'UTC+8', value: 8},
+      {zone: 'UTC+7', value: 7},
+      {zone: 'UTC+6:30', value: 6.5},
+      {zone: 'UTC+6', value: 6},
+      {zone: 'UTC+5:45', value: 5.75},
+      {zone: 'UTC+5:30', value: 5.5},
+      {zone: 'UTC+5', value: 5},
+      {zone: 'UTC+4:30', value: 4.5},
+      {zone: 'UTC+4', value: 4},
+      {zone: 'UTC+3', value: 3},
+      {zone: 'UTC+2', value: 2},
+      {zone: 'UTC+1', value: 1},
+      {zone: 'UTC+0', value: 0},
+      {zone: 'UTC-1', value: -1},
+      {zone: 'UTC-2', value: -2},
+      {zone: 'UTC-2:30', value: -2.5},
+      {zone: 'UTC-3', value: -3},
+      {zone: 'UTC-4', value: -4},
+      {zone: 'UTC-5', value: -5},
+      {zone: 'UTC-6', value: -6},
+      {zone: 'UTC-7', value: -7},
+      {zone: 'UTC-8', value: -8},
+      {zone: 'UTC-9', value: -9},
+      {zone: 'UTC-9:30', value: -9.5},
+      {zone: 'UTC-10', value: -10},
+      {zone: 'UTC-11', value: -11},
+      {zone: 'UTC-12', value: -12}
+    ]
+  end
+
+  def selected_timezone(timezone, user)
+    return false if user.nil?
+
+    return true if user.timezone==timezone[:value]
+    return false
+  end
+
   def sum(warehouses)
     sum=0
     warehouses.each { |item| sum+=item.amount*item.product.price_in }
     return sum
+  end
+
+  def any_working_sign(user)
+    if user.active_working_employees.count==0
+      return ''
+    elsif user.active_working_employees.count==1
+      return "(#{user.active_working_employees.count} работает)"
+    elsif user.active_working_employees.count>1
+      return "(#{user.active_working_employees.count} работают)"
+    end
   end
 
   def get_links(model)
@@ -41,11 +100,11 @@ module ApplicationHelper
   end
 
   def to_local(time)
-    time.localtime.to_s[0...-9]
+    (time+@user.timezone.hour).to_s[0..-14]
   end
 
   def to_local_time(time)
-    time.localtime.to_s[11...-9]
+    (time+@user.timezone.hour).to_s[11..-8]
   end
 
   def toggle_active(model)

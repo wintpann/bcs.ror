@@ -7,6 +7,14 @@
   <%= f.text_field :name %>
 </div>
 <div>
+  <%= f.label :timezone, "Часовой пояс" %>
+  <%= f.select(:timezone) do %>
+    <% timezones.each do |timezone| %>
+      <%= content_tag :option, timezone[:zone], value: timezone[:value], selected: selected_timezone(timezone, @user) %>
+    <% end %>
+  <% end %>
+</div>
+<div>
   <%= f.label :password, "Пароль" %>
   <%= f.password_field :password %>
 </div>

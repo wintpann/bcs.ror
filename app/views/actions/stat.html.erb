@@ -1,9 +1,17 @@
 <div class="page-title">
-  <%= "Заработано (чистыми): #{current_user.earned} руб" %>
+  <%= "#{@user.name}: статистика" %>
 </div>
-<div class="page-title">
-  <%= "Списано на сумму: #{current_user.throwed} руб" %>
-</div>
-<div class="page-title">
-  <%= "На складе: #{sum(current_user.warehouses)} руб" %>
-</div>
+<table>
+  <tr>
+    <td>Заработано (чистыми):</td>
+    <td><%= @user.earned %> руб</td>
+  </tr>
+  <tr>
+    <td>Списано на сумму:</td>
+    <td><%= -@user.throwed %> руб</td>
+  </tr>
+  <tr>
+    <td>На складе:</td>
+    <td><%= sum(@user.warehouses) %> руб</td>
+  </tr>
+</table>
