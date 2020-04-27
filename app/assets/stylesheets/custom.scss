@@ -569,3 +569,8 @@ th {
     margin: 0 auto;
   }
 }
+.current_page{
+  transform: scale(1.3);
+  margin: 0 5px;
+  &>a{background-color: rgb(80, 50, 35) !important;}
+}

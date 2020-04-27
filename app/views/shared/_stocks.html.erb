@@ -8,7 +8,7 @@
   <% stocks.each do |item| %>
     <tr>
       <td>
-        <%=link_to item.product.name, user_product_path(params[:user_id], item.product.id) %>
+        <%=link_to "⎆ #{item.product.name}", user_product_path(params[:user_id], item.product.id) %>
       </td>
       <td>
         <%=item.amount%>

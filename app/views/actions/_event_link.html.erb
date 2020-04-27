@@ -25,7 +25,7 @@
       <%= link_to "⎆ #{to_local_time(event.created_at)}", user_event_path(user_id, event.id), class: 'time' %>
       <%= content_tag :span, "#{event.sum} руб", class: 'sum' %>
       <%= content_tag :span, "Передача товара для:", class: 'type' %>
-      <%= link_to event.giving_events.first.employee.name, user_employee_path(params[:user_id], event.giving_events.first.employee.id), class: 'employee' %>
+      <%= link_to "⎆ #{event.giving_events.first.employee.name}", user_employee_path(params[:user_id], event.giving_events.first.employee.id), class: 'employee' %>
     </div>
   </div>
 
@@ -35,7 +35,7 @@
     <div>
       <%= content_tag :div, "#{to_local_time(event.created_at)}", class: 'time' %>
       <%= content_tag :span, "Начало рабочей сессии:", class: 'type' %>
-      <%= link_to event.start_work_session_event.employee.name, user_employee_path(params[:user_id], event.start_work_session_event.employee.id), class: 'employee' %>
+      <%= link_to "⎆ #{event.start_work_session_event.employee.name}", user_employee_path(params[:user_id], event.start_work_session_event.employee.id), class: 'employee' %>
     </div>
   </div>
 
@@ -46,7 +46,7 @@
         <%= link_to "⎆ #{to_local_time(event.created_at)}", user_event_path(user_id, event.id), class: 'time' %>
         <%= content_tag :span, "#{event.sum} руб", class: 'sum' %>
         <%= content_tag :span, "Получение товара от:", class: 'type' %>
-        <%= link_to event.taking_events.first.employee.name, user_employee_path(params[:user_id], event.taking_events.first.employee.id), class: 'employee' %>
+        <%= link_to "⎆ #{event.taking_events.first.employee.name}", user_employee_path(params[:user_id], event.taking_events.first.employee.id), class: 'employee' %>
       </div>
   </div>
 
@@ -57,7 +57,7 @@
         <%= link_to "⎆ #{to_local_time(event.created_at)}", user_event_path(user_id, event.id), class: 'time' %>
         <%= content_tag :span, "+#{event.sum} руб", class: 'sum-green' %>
         <%= content_tag :span, "Продажа товара: ", class: 'type' %>
-        <%= link_to event.selling_events.first.employee.name, user_employee_path(params[:user_id], event.selling_events.first.employee.id), class: 'employee' %>
+        <%= link_to "⎆ #{event.selling_events.first.employee.name}", user_employee_path(params[:user_id], event.selling_events.first.employee.id), class: 'employee' %>
       </div>
   </div>
 
@@ -68,7 +68,7 @@
         <%= content_tag :div, "#{to_local_time(event.created_at)}", class: 'time' %>
         <%= content_tag :span, "-#{event.sum} руб", class: 'sum-red' %>
         <%= content_tag :span, "Зарплата для: ", class: 'type' %>
-        <%= link_to event.employee_salary_event.employee.name, user_employee_path(params[:user_id], event.employee_salary_event.employee.id), class: 'employee' %>
+        <%= link_to "⎆ #{event.employee_salary_event.employee.name}", user_employee_path(params[:user_id], event.employee_salary_event.employee.id), class: 'employee' %>
       </div>
   </div>
 
@@ -78,7 +78,7 @@
     <div>
       <%= content_tag :div, "#{to_local_time(event.created_at)}", class: 'time' %>
       <%= content_tag :span, "Конец рабочей сессии:", class: 'type' %>
-      <%= link_to event.end_work_session_event.employee.name, user_employee_path(params[:user_id], event.end_work_session_event.employee.id), class: 'employee' %>
+      <%= link_to "⎆ #{event.end_work_session_event.employee.name}", user_employee_path(params[:user_id], event.end_work_session_event.employee.id), class: 'employee' %>
     </div>
   </div>
 
