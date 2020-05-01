@@ -2,7 +2,12 @@
 <ul class="paginator">
   <% links[:left].upto(links[:right]) do |link| %>
     <% if link==params[:page].to_i %><li class="current_page"><% else %><li><% end %>
-      <%= link_to link, user_events_path(params[:user_id], page: link, search:{type: params[:search][:type]||'all', employee: params[:search][:employee]||'all', date_from: params[:search][:date_from]||AllEvent.first.created_at.strftime('%Y-%m-%d'), date_to: params[:search][:date_to]||AllEvent.last.created_at.strftime('%Y-%m-%d'), sort: params[:search][:sort]||'date_desc'}) %>
+
+        <%= link_to "#{link}", user_events_path(params[:user_id], page: link, search:{type: params[:search][:type]||'all', employee: params[:search][:employee]||'all', date_from: params[:search][:date_from]||AllEvent.first.created_at.strftime('%Y-%m-%d'), date_to: params[:search][:date_to]||AllEvent.last.created_at.strftime('%Y-%m-%d'), sort: params[:search][:sort]||'date_desc'}) %>
+
     </li>
+  <% end %>
+  <% if @all_events.total_pages!=links[:right] %>
+    <li><%= link_to "⇢", user_events_path(params[:user_id], page: links[:right]+1, search:{type: params[:search][:type]||'all', employee: params[:search][:employee]||'all', date_from: params[:search][:date_from]||AllEvent.first.created_at.strftime('%Y-%m-%d'), date_to: params[:search][:date_to]||AllEvent.last.created_at.strftime('%Y-%m-%d'), sort: params[:search][:sort]||'date_desc'}) %></li>
   <% end %>
 </ul>
