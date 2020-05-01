@@ -40,11 +40,11 @@ module ActionsHelper
     return nil if !all_events.any?
     @events={}
 
-    old_date=to_local(all_events.first.created_at)
+    old_date=to_local_date(all_events.first.created_at)
     common_events=[]
 
     all_events.each do |event|
-      new_date=to_local(event.created_at)
+      new_date=to_local_date(event.created_at)
       if event==all_events.last
         if new_date==old_date
           common_events << event

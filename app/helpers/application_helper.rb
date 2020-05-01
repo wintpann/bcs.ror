@@ -100,6 +100,10 @@ module ApplicationHelper
   end
 
   def to_local(time)
+    (time+@user.timezone.hour).to_s[0..-8]
+  end
+
+  def to_local_date(time)
     (time+@user.timezone.hour).to_s[0..-14]
   end
 
