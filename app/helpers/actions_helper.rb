@@ -36,9 +36,9 @@ module ActionsHelper
     return (at_least_one_product ? false : true)
   end
 
-  def to_hash_of_arrays_by_date(all_events)
+  def by_date(all_events)
     return nil if !all_events.any?
-    @events={}
+    @events=[]
 
     old_date=to_local_date(all_events.first.created_at)
     common_events=[]
@@ -48,16 +48,16 @@ module ActionsHelper
       if event==all_events.last
         if new_date==old_date
           common_events << event
-          @events["#{old_date}"]=common_events
+          @events << {date: old_date, events: common_events}
         else
-          @events["#{old_date}"]=common_events
-          @events["#{new_date}"]=[event]
+          @events << {date: old_date, events: common_events}
+          @events << {date: new_date, events: [event]}
         end
       else
         if new_date==old_date
           common_events << event
         else
-          @events["#{old_date}"]=common_events
+          @events << {date: old_date, events: common_events}
           common_events=[]
           old_date=new_date
           common_events << event

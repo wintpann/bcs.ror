@@ -64,7 +64,7 @@ class ActionsController < ApplicationController
     end
 
     @events=@all_events.paginate(params[:page])
-    @events=( @events ? to_hash_of_arrays_by_date(@events) : nil )
+    @events=( @events ? by_date(@events) : nil )
   end
 
   def event
