@@ -32,10 +32,14 @@
     <div>
       <%= f.label :sort, "Сортировать по" %>
       <%= f.select(:sort) do %>
-        <%= content_tag :option, 'дате (сперва новые)', value: 'date_desc', selected: sort_selected('date_desc') %>
-        <%= content_tag :option, 'дате (сперва старые)', value: 'date_asc', selected: sort_selected('date_asc') %>
-        <%= content_tag :option, 'сумме (сперва большие)', value: 'sum_desc', selected: sort_selected('sum_desc') %>
-        <%= content_tag :option, 'сумме (сперва малые)', value: 'sum_asc', selected: sort_selected('sum_asc') %>
+        <optgroup label="Дата">
+          <%= content_tag :option, 'Сперва новые', value: 'date_desc', selected: sort_selected('date_desc') %>
+          <%= content_tag :option, 'Сперва старые', value: 'date_asc', selected: sort_selected('date_asc') %>
+        </optgroup>
+        <optgroup label="Сумма">
+          <%= content_tag :option, 'Сперва большие', value: 'sum_desc', selected: sort_selected('sum_desc') %>
+          <%= content_tag :option, 'Сперва малые', value: 'sum_asc', selected: sort_selected('sum_asc') %>
+        </optgroup>
       <% end %>
     </div>
     <%= hidden_field_tag :page, 1 %>

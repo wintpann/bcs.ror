@@ -119,6 +119,11 @@ module ApplicationHelper
     model.active? ? "Удалить" : "Восстановить"
   end
 
+  def active_toggler_sign(state)
+    return "Активен" if state
+    return "Неактивен"
+  end
+
   def confirm_message(model)
     item_type=model.class
     model.active? ? "Вы уверены? Будет помещено в <Удаленные>, вы сможете восстановить его позже" : "Вы собираетесь восстановить его"

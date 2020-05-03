@@ -3,7 +3,7 @@
     <ul>
       <% collection.each do |collection_item| %>
         <li>
-          <%= link_to "#{collection_item.name} : #{collection_item.active?}", "#{common_url}/#{collection_item.id}"%>
+          <%= link_to "#{collection_item.email} : #{active_toggler_sign(collection_item.active?)}", "#{common_url}/#{collection_item.id}"%>
           <%= link_to "ПЕРЕКЛЮЧИТЬ", toggle_user_path(user_id: collection_item.id), method: :post, class: 'btn'%>
         </li>
       <% end %>

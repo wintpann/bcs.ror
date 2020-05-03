@@ -3,7 +3,7 @@ class Employee < ApplicationRecord
 
   def before_saving
     self.name.strip!
-    self.name.capitalize!
+    self.name.upcase!
   end
 
   belongs_to :user
